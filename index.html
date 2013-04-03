@@ -1,44 +1,46 @@
 <!doctype html>
 <html lang="es">
-    <head>
-        <!-- Title block allowing child pages to override -->
-        <title>Empty</title>
-        <link rel="shortcut icon" type="image/ico" href="favicon.ico" />
-        <!-- Styles -->
-        <link href="app.css" rel="stylesheet" type="text/css" media="all"/>
-        <!-- Style block allowing child pages to inject their own styles -->
-        
-        <link rel="stylesheet" href="css/gumby.css">
-         <meta charset="UTF-8">
-    </head>
-    <body>
-        <div class='container'>
-            <!-- Include -->
-            <header>
-	<h1>Curso de formación Profesional 2</h1>
-    <h3>Un curso de programación dictado por gcoop</h3>
-</header>
+  <head>
+    <meta charset="UTF-8">
+    <title>Curso Formación Profesional</title>
+    <link rel="shortcut icon" type="image/ico" href="favicon.ico" />
 
-            <!-- Content block, child page inject content -->
-             
-	<h1>Motivación</p>     
-	<!-- TODO: Create my project :-) -->
+    <link rel="stylesheet" href="css/gumby.css">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+
+    <style>
+      #map {
+        height: 180px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class='container'>
+
+      <header>
+      <h1>Curso de formación Profesional 2</h1>
+      <h3>Un curso de programación dictado por gcoop</h3>
+      </header>
+
+      <h1>Motivación</p>   
+        <!-- TODO: Create my project :-) -->
 
 
 
-    <h1>Docentes</h1>
+        <h1>Docentes</h1>
 
-    <h1>Programa de clases</h1>
+        <h1>Programa de clases</h1>
 
-    <h1>¿Dónde?</h1>
+        <h1>¿Dónde?</h1>
 
-    <h1>Costos</h1>
+        <div id="map"></div>
 
-    $1200
 
-        </div>
-        <!-- Script block allowing child pages to inject their own scripts -->
-        
-        <script src="app.js"></script>
+      </div>
+
+      <script>
+        var map = L.map('map').setView([51.505, -0.09], 13);
+      </script>
     </body>
-</html>
+  </html>
