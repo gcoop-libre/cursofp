@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
     <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
     <script src="http://speakerdeck.com/assets/embed.js"></script>
+    <script src="js/jquery-1.9.1.js"></script>
+    <script src="js/jquery.collapse.js"></script>
   </head>
 
   <body>
@@ -67,6 +69,133 @@
 
       <div class='container'>
         <h2>Programa de clases</h2>
+
+        <div class="row programa">
+          <div class="six columns nivel1">
+            <h4>Nivel 1: Administración</h4>
+          </div>
+
+          <div class="six columns nivel2">
+            <h4>Nivel 2: Programación</h4>
+
+            <div class="planificacion">
+              <h5>Semana 1</h5>
+
+              <div class='temas'>
+                <ul>
+                  <li>Para que y porque programar
+                  <li>Ejemplos el browser (javascript)
+                  <li>La idea de lenguaje.
+                  <li>Ejemplos en pilas.
+                  <li>Lenguajes de alto y bajo nivel
+                </ul>
+              </div>
+
+
+              <h5>Semana 2</h5>
+
+              <div class='temas'>
+                <ul>
+                  <li>El terminal interactivo
+                  <li>Operaciones con python (in,suma,resta... etc);
+                  <li>Interpolacion de cadenas.
+                  <li>Idea de booleanos
+                  <li>Ejercicios: problemas matematicos simples
+                </ul>
+              </div>
+
+
+              <h5>Semana 3</h5>
+
+              <div class='temas'>
+                <ul>
+                  <li>Scripts (Editor de texto: Ninja)
+                  <li>Control de flujo con if
+                  <li>Entendiendo los errores (Excepciones de python)
+                  <li>Listas y uso de for
+                  <li>convertir string en lista
+                  <li>funciones (Ordenando el programa en unidades mas pequeñas)
+                  <li>Ejercicios:
+                  <li>funcion contar(cuenta ocurrencias de un elemento en un string) ¿como seria la funcion para listas?
+                  <li>funcion hacer_cuenta() que permita evaluar un string y devuelva el resultado de la operacion
+                  <li>def sumar(string): a ,b = string.split('+') return int(a) + int(b)
+                </ul>
+              </div>
+
+
+              <h5>Semana 4</h5>
+
+              <div class='temas'>
+                <ul>
+                  <li>Ordenando nuestas colecciones de funciones
+                  <li>import, codigo repartido en varios archivos
+                  <li>entrada desde el browser (bottle)
+                  <li>Ejercicios de semanas 2 y 3 version web
+                </ul>
+              </div>
+
+
+              <h5>Semana 5</h5>
+
+              <div class='temas'>
+                <ul>
+                  <li>Una interfaz grafica sencilla
+                  <li>idea de iterador (generador simple)
+                  <li>Leer y escribir en un archivo
+                  <li>eval (ejemplo de calculadora sencilla)
+                </ul>
+              </div>
+
+              <h5>Semana 6</h5>
+
+              <div class='temas'>
+                <ul>
+                  <li>Standar lib
+                  <li>pickle, sys, os ...
+                </ul>
+              </div>
+
+              <h5>Semana 7</h5>
+
+              <div class='temas'>
+                <ul>
+                  <li>HTML (bootstrap?)
+                  <li>la web urls
+                  <li>splinter
+                </ul>
+              </div>
+
+              <h5>Semana 8</h5>
+
+              <div class='temas'>
+                <ul>
+                  <li>Juego de pilas con logica (asteroids o space invaders)
+                  <li>Objetos (Herencia y Polimorfismo) Nave propia, naves enemigas
+                </ul>
+              </div>
+
+              <h5>Semana 9</h5>
+
+              <div class='temas'>
+                <ul>
+                  <li>virtualenv y pip (git - github)
+                  <li>Inicio trabajo final (juego, editor, app web)
+                </ul>
+              </div>
+
+              <h5>Semana 10</h5>
+
+              <div class='temas'>
+                <ul>
+                  <li>proyecto final
+                  <li>Leyendo código
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <div class='container shared'>
@@ -164,6 +293,7 @@
 
 
       <script>
+        /* Mapa del lugar en donde se dicta el curso */
         var posicion = [-34.58591, -58.42408];
         var map = L.map('map').setView(posicion, 13);
 
@@ -172,8 +302,18 @@
           attribution: '<a href="http://openstreetmap.org">OpenStreetMap</a>'
         }).addTo(map);
 
-
         L.marker(posicion).addTo(map);
+
+        /* Programa colapsable */
+        new jQueryCollapse($(".planificacion"), {
+          open: function() {
+            this.slideDown(150);
+          },
+          close: function() {
+            this.slideUp(150);
+          }
+        });
+
       </script>
     </body>
   </html>

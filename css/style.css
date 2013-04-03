@@ -58,3 +58,37 @@ background: #21c2ff;
 background: #00aced;
 border: 1px solid #00aced;
 }
+
+.nivel1 {
+    background-color: #d9edf7;
+    border: 1px solid #bce8f1;
+}
+
+.nivel2 {
+    background-color: #dff0d8;
+    border: 1px solid #d6e9c6;
+}
+
+.programa {
+    margin-bottom: 2em;
+}
+
+.semana {
+    margin: 1em;
+}
+
+
+.temas {
+    margin-left: 2em;
+}
+
+
+.programa h5 {
+    margin: 0 0 5px;
+    background: url("../images/sprite.png") 2px 5px no-repeat;
+    padding-left: 20px;
+}
+
+.programa h5.open {
+    background-position: 0px -34px;
+}
