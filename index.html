@@ -19,64 +19,108 @@
       .shared {
         background-color: rgb(230, 230, 230);
       }
+
+      .btn.facebook, .skiplink.facebook {
+        background: #3b5998;
+        border: 1px solid #3b5998;
+      }
+      .btn.facebook:hover, .skiplink.facebook:hover {
+        background: #4c70ba;
+      }
+
+      footer#credits .socbtns {
+        float: right;
+      }
+
+      .socbtns {
+        display: inline-block;
+        padding: 15px 0;
+        overflow: hidden;
+      }
+
+      .socbtns li {
+        float: left;
+        margin-right: 2px;
+      }
+
+      .pie {
+        background-color: rgb(230, 230, 230);
+        border-top: 1px solid #ccc;
+        font-family: 'Open Sans';
+      }
     </style>
   </head>
+
   <body>
-      <header>
-      <h1>Curso de formación Profesional 2</h1>
-      <h3>Un curso de programación dictado por gcoop</h3>
-      </header>
+    <header>
+    <h1>Curso de Formación Profesional 2</h1>
+    <h3>Un curso de programación dictado por gcoop</h3>
+    </header>
 
-      <h1>Motivación</p>   
-        <!-- TODO: Create my project :-) -->
+    <h1>Motivación</p>   
+      <h1>Docentes</h1>
+      <h1>Programa de clases</h1>
 
+      <div class='container shared'>
+        <h2>Recursos</h2>
 
+        <div class="row">
+          <div class="four columns">
+            <script async class="speakerdeck-embed" data-id="3393b620129601307b4f123138194bc5" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+          </div>
 
-        <h1>Docentes</h1>
+          <div class="four columns">
+            <script async class="speakerdeck-embed" data-id="3393b620129601307b4f123138194bc5" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+          </div>
 
-        <h1>Programa de clases</h1>
-
-        <div class='container shared'>
-            <h2>Recursos</h2>
-
-            <div class="row">
-              <div class="four columns">
-                <script async class="speakerdeck-embed" data-id="3393b620129601307b4f123138194bc5" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
-              </div>
-
-              <div class="four columns">
-                <script async class="speakerdeck-embed" data-id="3393b620129601307b4f123138194bc5" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
-              </div>
-
-              <div class="four columns">
-                <script async class="speakerdeck-embed" data-id="3393b620129601307b4f123138194bc5" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="four columns">
-                <img src='http://placehold.it/500x500'></img>
-              </div>
-
-              <div class="four columns">
-              </div>
-
-              <div class="four columns">
-              </div>
-
-              <div class="four columns">
-              </div>
-            </div>
+          <div class="four columns">
+            <script async class="speakerdeck-embed" data-id="3393b620129601307b4f123138194bc5" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+          </div>
         </div>
 
+        <div class="row">
+          <div class="four columns">
+            <img src='http://placehold.it/500x500'></img>
+          </div>
 
-        <h1>¿Dónde?</h1>
+          <div class="four columns">
+          </div>
 
-        <p>El curso se dictará en <strong> Gurruchaga 2122</strong>, en el barrio de Palermo (CABA):
+          <div class="four columns">
+          </div>
 
-        <div id="map"></div>
+          <div class="four columns">
+          </div>
+        </div>
+      </div>
 
-        <h1>Mas información</h1>
+
+      <h1>¿Dónde?</h1>
+
+      <p>El curso se dictará en <strong> Gurruchaga 2122</strong>, en el barrio de Palermo (CABA):
+
+      <div id="map"></div>
+
+      <h1>Mas información</h1>
+
+
+
+
+
+      <div class="container pie">
+        <footer class="row" id="credits">
+
+        <div class="six columns left-center">
+        </div>
+
+        <div class="six columns center">
+          <ul class="socbtns">
+            <li><div class="btn primary"><a target="_blank" href="https://github.com/hugoruscitti/cursofp">Github</a></div></li>
+            <li><div class="btn facebook"><a target="_blank" href="http://www.facebook.com/groups/415708205151420/">Facebook</a></div></li>
+          </ul>
+        </div>
+        </footer>
+      </div>
 
 
       <script>
