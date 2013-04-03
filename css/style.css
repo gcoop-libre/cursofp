@@ -45,3 +45,16 @@ However, this blank file is available if you prefer
         border-top: 1px solid #ccc;
         font-family: 'Open Sans';
       }
+
+
+figcaption {
+    text-align: center;
+}
+
+.btn.twitter:hover, .skiplink.twitter:hover {
+background: #21c2ff;
+}
+.btn.twitter, .skiplink.twitter {
+background: #00aced;
+border: 1px solid #00aced;
+}
