@@ -2,3 +2,46 @@
 We highly recommend you use SASS and write your custom styles in sass/_custom.scss.
 However, this blank file is available if you prefer
 */
+
+#map {
+    border: 2px solid gray;
+    margin: 1em;
+}
+
+      #map {
+        height: 200px;
+        width: 400px;
+      }
+
+      .shared {
+        background-color: rgb(230, 230, 230);
+      }
+
+      .btn.facebook, .skiplink.facebook {
+        background: #3b5998;
+        border: 1px solid #3b5998;
+      }
+      .btn.facebook:hover, .skiplink.facebook:hover {
+        background: #4c70ba;
+      }
+
+      footer#credits .socbtns {
+        float: right;
+      }
+
+      .socbtns {
+        display: inline-block;
+        padding: 15px 0;
+        overflow: hidden;
+      }
+
+      .socbtns li {
+        float: left;
+        margin-right: 2px;
+      }
+
+      .pie {
+        background-color: rgb(230, 230, 230);
+        border-top: 1px solid #ccc;
+        font-family: 'Open Sans';
+      }
