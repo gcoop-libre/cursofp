@@ -62,11 +62,13 @@ border: 1px solid #00aced;
 .nivel1 {
     background-color: #d9edf7;
     border: 1px solid #bce8f1;
+    padding: 1em;
 }
 
 .nivel2 {
     background-color: #dff0d8;
     border: 1px solid #d6e9c6;
+    padding: 1em;
 }
 
 .programa {
@@ -91,4 +93,8 @@ border: 1px solid #00aced;
 
 .programa h5.open {
     background-position: 0px -34px;
+}
+
+img.photo {
+    margin-top: 2em;
 }
