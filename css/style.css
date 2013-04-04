@@ -4,13 +4,12 @@ However, this blank file is available if you prefer
 */
 
 #map {
-    border: 2px solid gray;
-    margin: 1em;
+    border: 2px solid black;
 }
 
       #map {
         height: 200px;
-        width: 400px;
+        width: 100%;
       }
 
       .shared {
@@ -97,4 +96,13 @@ border: 1px solid #00aced;
 
 img.photo {
     margin-top: 2em;
+    border: 2px solid black;
+}
+
+header {
+    text-align: center;
+}
+
+a {
+color: #2678D0;
 }
