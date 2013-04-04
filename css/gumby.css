@@ -79,7 +79,7 @@ h6 { font-size: 16px; font-size: 1rem; }
 .subhead { color: #777; font-weight: normal; margin-bottom: 20px; }
 
 /*=====================================================  	Links & Paragraph styles 	 	======================================================*/
-p { font-family: "Open Sans"; font-weight: 400; font-size: 16px; font-size: 1.2rem; margin-bottom: 13px; line-height: 1.625em; }
+p { font-family: "Open Sans"; font-weight: 400; font-size: 16px; font-size: 1rem; margin-bottom: 13px; line-height: 1.625em; }
 p.lead { font-size: 20px; font-size: 1.25rem; margin-bottom: 18px; }
 @media only screen and (max-width: 768px) { p { font-size: 17.6px; font-size: 1.1rem; line-height: 1.625em; } }
 

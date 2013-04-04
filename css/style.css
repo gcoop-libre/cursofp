@@ -106,3 +106,7 @@ header {
 a {
 color: #2678D0;
 }
+
+.presentacion p {
+    font-size: 1.3rem;
+}
