@@ -1,0 +1,920 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+<title>Introducción al Software Libre</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="Introducción al Software Libre"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2013-04-08"/>
+<meta name="author" content="Osiris Alejandro Gómez"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+
+<link rel="stylesheet" type="text/css" href="print.css"/>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">Introducción al Software Libre</h1>
+
+
+<div id="table-of-contents">
+<h2>&Iacute;ndice</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Qué es el Software Libre?</a>
+<ul>
+<li><a href="#sec-1-1">1.1 ¿Cómo empezó todo?</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1 GNU</a></li>
+<li><a href="#sec-1-1-2">1.1.2 Linux</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2 Las cuatro libertades</a>
+<ul>
+<li><a href="#sec-1-2-1">1.2.1 libertad 0</a></li>
+<li><a href="#sec-1-2-2">1.2.2 libertad 1</a></li>
+<li><a href="#sec-1-2-3">1.2.3 libertad 2</a></li>
+<li><a href="#sec-1-2-4">1.2.4 libertad 3</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-3">1.3 GPL</a></li>
+<li><a href="#sec-1-4">1.4 Copyleft</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2 Creative Commons</a></li>
+<li><a href="#sec-3">3 Distribuciones GNU/Linux</a>
+<ul>
+<li><a href="#sec-3-1">3.1 Primeras Distribuciones</a></li>
+<li><a href="#sec-3-2">3.2 Principales Distribuciones</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4 Consola versus Escritorio</a>
+<ul>
+<li><a href="#sec-4-1">4.1 Ejemplos Consola</a>
+<ul>
+<li><a href="#sec-4-1-1">4.1.1 Reescalar fotos mediante imagemagick</a></li>
+<li><a href="#sec-4-1-2">4.1.2 Grabar un CD usando wodim</a></li>
+<li><a href="#sec-4-1-3">4.1.3 Grabar un DVD usando growisofs</a></li>
+<li><a href="#sec-4-1-4">4.1.4 Reemplazar texto en varios archivos</a></li>
+<li><a href="#sec-4-1-5">4.1.5 Backup de archivos usando rsync</a></li>
+<li><a href="#sec-4-1-6">4.1.6 Instalar aplicaciones usando apt-get/aptitude</a></li>
+<li><a href="#sec-4-1-7">4.1.7 Acceso remoto usando ssh, scp, screen</a></li>
+</ul></li>
+</ul>
+</li>
+<li><a href="#sec-5">5 Línea de Tiempo GNU/Linux</a></li>
+<li><a href="#sec-6">6 Aplicaciones libres</a></li>
+<li><a href="#sec-7">7 Virtualizar o Emular</a>
+<ul>
+<li><a href="#sec-7-1">7.1 QEMU</a></li>
+<li><a href="#sec-7-2">7.2 VirtualBox</a></li>
+<li><a href="#sec-7-3">7.3 Xen</a></li>
+<li><a href="#sec-7-4">7.4 OpenVZ</a></li>
+<li><a href="#sec-7-5">7.5 LXC</a></li>
+</ul>
+</li>
+<li><a href="#sec-8">8 Cómo Migrar?</a></li>
+<li><a href="#sec-9">9 Créditos</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-3">
+<h3 id="sec-1"><span class="section-number-3">1</span> Qué es el Software Libre?</h3>
+<div class="outline-text-3" id="text-1">
+
+
+</div>
+
+<div id="outline-container-1-1" class="outline-4">
+<h4 id="sec-1-1"><span class="section-number-4">1.1</span> ¿Cómo empezó todo?</h4>
+<div class="outline-text-4" id="text-1-1">
+
+
+</div>
+
+<div id="outline-container-1-1-1" class="outline-5">
+<h5 id="sec-1-1-1"><span class="section-number-5">1.1.1</span> GNU</h5>
+<div class="outline-text-5" id="text-1-1-1">
+
+
+<p>
+     <img src="img/GNU.png"  alt="img/GNU.png" />
+</p>
+<p>
+     En 1984, Richard Stallman <sup><a class="footref" name="fnr-.1" href="#fn-.1">1</a></sup> comenzó a trabajar en el
+     proyecto GNU <sup><a class="footref" name="fnr-.2" href="#fn-.2">2</a></sup>, y un año más tarde fundó la Free Software
+     Foundation (FSF <sup><a class="footref" name="fnr-.3" href="#fn-.3">3</a></sup>). Stallman introdujo una definición para
+     free software y el concepto de <b>copyleft</b>, el cual desarrolló
+     para dar a los usuarios libertad y para restringir las
+     posibilidades de apropiación del software.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-1-2" class="outline-5">
+<h5 id="sec-1-1-2"><span class="section-number-5">1.1.2</span> Linux</h5>
+<div class="outline-text-5" id="text-1-1-2">
+
+
+<p>
+     <img src="img/tux.png"  alt="img/tux.png" />
+</p>
+<p>
+     Hacia 1991, cuando la primera versión del núcleo Linux <sup><a class="footref" name="fnr-.4" href="#fn-.4">4</a></sup>
+     fue liberada, el proyecto GNU había producido varios de los
+     componentes del sistema operativo, incluyendo un intérprete de
+     comandos, una biblioteca C y un compilador, pero aún no contaba
+     con el núcleo que permitiera completar el sistema
+     operativo. Entonces, el núcleo creado por Linus
+     Torvalds <sup><a class="footref" name="fnr-.5" href="#fn-.5">5</a></sup>, quien se encontraba por entonces estudiando
+     en la Universidad de Helsinki, llenó el "hueco" final que el
+     sistema operativo GNU exigía.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1-2" class="outline-4">
+<h4 id="sec-1-2"><span class="section-number-4">1.2</span> Las cuatro libertades</h4>
+<div class="outline-text-4" id="text-1-2">
+
+
+</div>
+
+<div id="outline-container-1-2-1" class="outline-5">
+<h5 id="sec-1-2-1"><span class="section-number-5">1.2.1</span> libertad 0</h5>
+<div class="outline-text-5" id="text-1-2-1">
+
+
+<p>
+     Ejecutar el programa con cualquier propósito (privado, educativo,
+     público, comercial, militar, etc.)
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-2-2" class="outline-5">
+<h5 id="sec-1-2-2"><span class="section-number-5">1.2.2</span> libertad 1</h5>
+<div class="outline-text-5" id="text-1-2-2">
+
+
+<p>
+     Estudiar y modificar el programa (para lo cual es necesario
+     acceder al código fuente).
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-2-3" class="outline-5">
+<h5 id="sec-1-2-3"><span class="section-number-5">1.2.3</span> libertad 2</h5>
+<div class="outline-text-5" id="text-1-2-3">
+
+
+<p>
+     Copiar el programa de manera que se pueda ayudar al vecino o a
+     cualquiera.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-2-4" class="outline-5">
+<h5 id="sec-1-2-4"><span class="section-number-5">1.2.4</span> libertad 3</h5>
+<div class="outline-text-5" id="text-1-2-4">
+
+
+<p>
+     Mejorar el programa y publicar las mejoras (para lo cual es
+     necesario acceder al código fuente).
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1-3" class="outline-4">
+<h4 id="sec-1-3"><span class="section-number-4">1.3</span> GPL</h4>
+<div class="outline-text-4" id="text-1-3">
+
+
+<p>
+    La <b>Licencia Pública General de GNU</b> o más conocida por su nombre
+    en inglés <b>GNU General Public License</b> <sup><a class="footref" name="fnr-.6" href="#fn-.6">6</a></sup> o simplemente su
+    acrónimo del inglés <b>GNU GPL</b>, es una licencia creada por la Free
+    Software Foundation a mediados de los 80, y está orientada
+    principalmente a proteger la libre distribución, modificación y
+    uso de software. Su propósito es declarar que el software cubierto
+    por esta licencia es software libre y protegerlo de intentos de
+    apropiación que restrinjan esas libertades a los usuarios.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-4" class="outline-4">
+<h4 id="sec-1-4"><span class="section-number-4">1.4</span> Copyleft</h4>
+<div class="outline-text-4" id="text-1-4">
+
+
+<p>
+    <img src="img/copyleft.png"  alt="img/copyleft.png" />
+</p>
+<p>
+    Copyleft describe un grupo de derechos aplicados a una obra. Nace
+    dentro de la comunidad del Software Libre como una estrategia
+    legal para <b>liberar</b> el Software.
+</p>
+<p>
+    Su objetivo es: <b>Garantizar ciertas libertades sobre la     explotación y utilización de la obra y de sus obras derivadas.</b>
+    Cualquier trabajo derivado de un trabajo con copyleft debe a su
+    vez atenerse a los principios del copyleft
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-3">
+<h3 id="sec-2"><span class="section-number-3">2</span> Creative Commons</h3>
+<div class="outline-text-3" id="text-2">
+
+
+<p>
+Las licencias <b>Creative Commons</b> o <b>CC</b> están inspiradas en la
+licencia GPL (General Public License) de la Free Software Foundation,
+sin embargo no son un tipo de licenciamiento de software. La idea
+principal es posibilitar un modelo legal ayudado por herramientas
+informáticas para así facilitar la distribución y el uso de
+contenidos.
+</p>
+<p>
+Existen una serie de licencias Creative Commons <sup><a class="footref" name="fnr-.7" href="#fn-.7">7</a></sup>, cada una con
+diferentes configuraciones o principios, como el derecho del autor
+original a dar libertad para citar su obra, reproducirla, crear obras
+derivadas, ofrecerla públicamente y con diferentes restricciones como
+no permitir el uso comercial o respetar la autoría original.
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">Attribution</td><td class="left">BY</td></tr>
+<tr><td class="left">Attribution-Share Alike</td><td class="left">BY-SA</td></tr>
+<tr><td class="left">Attribution-No Derivative Works</td><td class="left">BY-ND</td></tr>
+<tr><td class="left">Attribution-Noncommercial</td><td class="left">BY-NC</td></tr>
+<tr><td class="left">Attribution-Noncommercial-No Derivative Works</td><td class="left">BY-NC-ND</td></tr>
+<tr><td class="left">Attribution-Noncommercial-Share</td><td class="left">BY-NC-SA</td></tr>
+</tbody>
+</table>
+
+
+<p>
+<img src="img/CC-BY.png"  alt="img/CC-BY.png" />
+<img src="img/CC-SA.png"  alt="img/CC-SA.png" />
+<img src="img/CC-ND.png"  alt="img/CC-ND.png" />
+<img src="img/CC-NC.png"  alt="img/CC-NC.png" />
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-3">
+<h3 id="sec-3"><span class="section-number-3">3</span> Distribuciones GNU/Linux</h3>
+<div class="outline-text-3" id="text-3">
+
+
+</div>
+
+<div id="outline-container-3-1" class="outline-4">
+<h4 id="sec-3-1"><span class="section-number-4">3.1</span> Primeras Distribuciones</h4>
+<div class="outline-text-4" id="text-3-1">
+
+
+<ul>
+<li>H J Lu's "Boot-root"
+</li>
+<li>MCC Interim Linux
+</li>
+<li>TAMU
+</li>
+<li>SLS (Softlanding Linux System)
+</li>
+<li>Yggdrasil Linux
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-4">
+<h4 id="sec-3-2"><span class="section-number-4">3.2</span> Principales Distribuciones</h4>
+<div class="outline-text-4" id="text-3-2">
+
+
+<ul>
+<li>Slackware (inicialmente basada en SLS)
+</li>
+<li>Debian
+</li>
+<li>RedHat
+</li>
+<li>Suse (inicialmente basada en Slackware)
+</li>
+<li>Gentoo (basada en código fuente)
+</li>
+</ul>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-3">
+<h3 id="sec-4"><span class="section-number-3">4</span> Consola versus Escritorio</h3>
+<div class="outline-text-3" id="text-4">
+
+
+<ul>
+<li>Todo lo que hacemos en el entorno gráfico lo podemos hacer desde
+     la consola&hellip;
+</li>
+<li>No todo lo que hacemos desde la consola se puede hacer en el
+     entorno gráfico&hellip;
+</li>
+<li>No siempre tendremos acceso gráfico al sistema&hellip;
+</li>
+<li>Pero siempre podremos acceder desde consola.
+</li>
+</ul>
+
+
+
+</div>
+
+<div id="outline-container-4-1" class="outline-4">
+<h4 id="sec-4-1"><span class="section-number-4">4.1</span> Ejemplos Consola</h4>
+<div class="outline-text-4" id="text-4-1">
+
+
+</div>
+
+<div id="outline-container-4-1-1" class="outline-5">
+<h5 id="sec-4-1-1"><span class="section-number-5">4.1.1</span> Reescalar fotos mediante imagemagick</h5>
+<div class="outline-text-5" id="text-4-1-1">
+
+
+
+
+
+<pre class="src src-sh">mkdir -p 800;<span class="org-keyword">for</span> f<span class="org-keyword"> in</span> *.jpg;<span class="org-keyword">do </span><span class="org-builtin">echo</span> $<span class="org-variable-name">f</span>;convert -filter cubic -resize 800 $<span class="org-variable-name">f</span> ./800/$<span class="org-variable-name">f</span>;<span class="org-keyword">done</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-1-2" class="outline-5">
+<h5 id="sec-4-1-2"><span class="section-number-5">4.1.2</span> Grabar un CD usando wodim</h5>
+<div class="outline-text-5" id="text-4-1-2">
+
+
+
+
+
+<pre class="src src-sh">wodim -v <span class="org-variable-name">dev</span>=/dev/hda <span class="org-variable-name">speed</span>=4 imagen.iso  
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-1-3" class="outline-5">
+<h5 id="sec-4-1-3"><span class="section-number-5">4.1.3</span> Grabar un DVD usando growisofs</h5>
+<div class="outline-text-5" id="text-4-1-3">
+
+
+
+
+
+<pre class="src src-sh">nice --10 growisofs -dvd-compat -speed=2 -Z /dev/hda -R -J -V iso /home/iso
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-1-4" class="outline-5">
+<h5 id="sec-4-1-4"><span class="section-number-5">4.1.4</span> Reemplazar texto en varios archivos</h5>
+<div class="outline-text-5" id="text-4-1-4">
+
+
+
+
+
+<pre class="src src-sh"><span class="org-keyword">for</span> i<span class="org-keyword"> in</span> *.txt;<span class="org-keyword">do</span> cat $<span class="org-variable-name">i</span> | sed s/hola/chau/g &gt;$<span class="org-variable-name">i</span>.tmp;mv $<span class="org-variable-name">i</span>.tmp $<span class="org-variable-name">i</span>;<span class="org-keyword">done</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-1-5" class="outline-5">
+<h5 id="sec-4-1-5"><span class="section-number-5">4.1.5</span> Backup de archivos usando rsync</h5>
+<div class="outline-text-5" id="text-4-1-5">
+
+
+
+
+
+<pre class="src src-sh">rsync -e ssh -vzogtprul /home/directorio/ usuario@host:/backup/directorio
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-1-6" class="outline-5">
+<h5 id="sec-4-1-6"><span class="section-number-5">4.1.6</span> Instalar aplicaciones usando apt-get/aptitude</h5>
+<div class="outline-text-5" id="text-4-1-6">
+
+
+
+
+
+<pre class="src src-sh">apt-get install aplicacion
+aptitude install aplicacion
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-1-7" class="outline-5">
+<h5 id="sec-4-1-7"><span class="section-number-5">4.1.7</span> Acceso remoto usando ssh, scp, screen</h5>
+<div class="outline-text-5" id="text-4-1-7">
+
+
+
+
+
+<pre class="src src-sh">ssh usuario@equipo comando
+
+scp * usuario@equipo:/directorio
+
+screen C-a c
+screen C-a d
+screen -r
+</pre>
+
+
+</div>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-3">
+<h3 id="sec-5"><span class="section-number-3">5</span> Línea de Tiempo GNU/Linux</h3>
+<div class="outline-text-3" id="text-5">
+
+
+<ul>
+<li><a href="http://futurist.se/gldt/">http://futurist.se/gldt/</a>
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-3">
+<h3 id="sec-6"><span class="section-number-3">6</span> Aplicaciones libres</h3>
+<div class="outline-text-3" id="text-6">
+
+
+<p>
+   Existen programas libres para hacer todo lo que habitualmente se
+   necesita hacer con una computadora. No es más dificil ni más fácil
+   usarlos, en la mayoría de los casos sólo es ligeramente distinto.
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" /><col class="left" /><col class="left" /><col class="left" /><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">Web</th><th scope="col" class="left">Chat</th><th scope="col" class="left">FTP/P2P</th><th scope="col" class="left">Oficina</th><th scope="col" class="left">Graficos</th><th scope="col" class="left">Multimedia</th><th scope="col" class="left">3D</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">Firefox</td><td class="left">aMSN</td><td class="left">aMule</td><td class="left">OO Writer</td><td class="left">Scribus</td><td class="left">Mplayer</td><td class="left">Blender</td></tr>
+<tr><td class="left">Konqueror</td><td class="left">emesene</td><td class="left">gFTP</td><td class="left">AbiWord</td><td class="left">Inkscape</td><td class="left">VLC</td><td class="left">k3d</td></tr>
+<tr><td class="left">KompoZer</td><td class="left">Pidgin</td><td class="left">KTorrent</td><td class="left">Kile</td><td class="left">The Gimp</td><td class="left">Audacity</td><td class="left">pythoncad</td></tr>
+<tr><td class="left">Akregator</td><td class="left">Ekiga</td><td class="left">LimeWire</td><td class="left">OO Calc</td><td class="left">F-Spot</td><td class="left">Audacious</td><td class="left">raster3d</td></tr>
+<tr><td class="left">Liferea</td><td class="left">ChatZilla</td><td class="left">Vuze</td><td class="left">Gnumeric</td><td class="left">imgSeek</td><td class="left">Kino</td><td class="left"></td></tr>
+<tr><td class="left">RSSOwl</td><td class="left">Konversation</td><td class="left">Freeloader</td><td class="left">OO Impress</td><td class="left">Xsane</td><td class="left">Avidemux</td><td class="left"></td></tr>
+<tr><td class="left">Amaya</td><td class="left">Kopete</td><td class="left">ncftp</td><td class="left">KPDF</td><td class="left">Digikam</td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">Bluefish</td><td class="left">KVIrc</td><td class="left">rtorrent</td><td class="left">Evince</td><td class="left">Imagick</td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">Epiphany</td><td class="left">X-Chat</td><td class="left"></td><td class="left">Korganizer</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">Quanta</td><td class="left"></td><td class="left"></td><td class="left">OO Base</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">KMail</td><td class="left"></td><td class="left"></td><td class="left">OO Draw</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">Thunderbird</td><td class="left"></td><td class="left"></td><td class="left">Latex</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">Evolution</td><td class="left"></td><td class="left"></td><td class="left"></td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+</tbody>
+</table>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-3">
+<h3 id="sec-7"><span class="section-number-3">7</span> Virtualizar o Emular</h3>
+<div class="outline-text-3" id="text-7">
+
+
+</div>
+
+<div id="outline-container-7-1" class="outline-4">
+<h4 id="sec-7-1"><span class="section-number-4">7.1</span> QEMU</h4>
+<div class="outline-text-4" id="text-7-1">
+
+
+<p>
+    QEMU <sup><a class="footref" name="fnr-.8" href="#fn-.8">8</a></sup> es un emulador de procesadores basado en la
+    traducción dinámica de binarios (conversión del código binario de
+    la arquitectura fuente en código entendible por la arquitectura
+    huésped). QEMU también tiene capacidades de virtualización dentro
+    de un sistema operativo, ya sea Linux, Windows, o cualquiera de
+    los sistemas operativos admitidos (de hecho es la forma más común
+    de uso). Esta máquina virtual puede ejecutarse en cualquier tipo
+    de Microprocesador o arquitectura (x86, x86-64, PowerPC, MIPS,
+    SPARC, etc.). Está licenciado en parte con la LGPL y la GPL de
+    GNU.
+</p>
+<p>
+    El objetivo principal es emular un sistema operativo dentro de
+    otro sin tener que reparticionar el disco duro, empleando para su
+    ubicación cualquier directorio dentro de éste.
+</p>
+<p>
+    El programa no dispone de GUI, pero existe otro programa llamado
+    QEMU manager que hace las veces de interfaz gráfica si se utiliza
+    QEMU desde Windows. También existe una versión para Linux llamado
+    qemu-launcher. En Mac OS X puede utilizarse el programa Q que
+    dispone de una interfaz gráfica para crear y administrar las
+    máquinas virtuales.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-7-2" class="outline-4">
+<h4 id="sec-7-2"><span class="section-number-4">7.2</span> VirtualBox</h4>
+<div class="outline-text-4" id="text-7-2">
+
+
+<p>
+    Sun xVM VirtualBox <sup><a class="footref" name="fnr-.9" href="#fn-.9">9</a></sup> es un software de
+    virtualización para arquitecturas x86 que fue desarrollado
+    originalmente por la empresa alemana innotek GmbH, pero que pasó a
+    ser propiedad de la empresa Sun Microsystems en febrero de 2008
+    cuando ésta compró a innotek. Por medio de esta aplicación es
+    posible instalar sistemas operativos adicionales, conocidos como
+    "sistemas invitados", dentro de otro sistema operativo
+    "anfitrión", cada uno con su propio ambiente virtual. Por ejemplo,
+    se podrían instalar diferentes distribuciones de Linux en un
+    VirtualBox instalado en Windows XP o viceversa.
+</p>
+<p>
+    Entre los sistemas operativos soportados (en modo anfitrión) se
+    encuentran GNU/Linux, Mac OS X, OS/2 Warp , Windows, y
+    Solaris/OpenSolaris, y dentro de éstos es posible virtualizar los
+    sistemas operativos FreeBSD, GNU/Linux, OpenBSD, OS/2 Warp,
+    Windows y Solaris.
+</p>
+<p>
+    La aplicación fue inicialmente ofrecida bajo una Licencia de
+    software no libre|licencia de software privado, pero en enero de
+    2007, después de años de desarrollo, surgió VirtualBox OSE (Open
+    Source Edition) bajo la licencia GPL 2.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-7-3" class="outline-4">
+<h4 id="sec-7-3"><span class="section-number-4">7.3</span> Xen</h4>
+<div class="outline-text-4" id="text-7-3">
+
+
+<p>
+    Xen <sup><a class="footref" name="fnr-.10" href="#fn-.10">10</a></sup> es una máquina virtual de código abierto desarrollada
+    por la Universidad de Cambridge. La meta del diseño es poder
+    ejecutar instancias de sistemas operativos con todas sus
+    características, de forma completamente funcional en un equipo
+    sencillo. Xen proporciona aislamiento seguro, control de recursos,
+    garantías de calidad de servicio y migración de máquinas virtuales
+    en caliente. Los sistemas operativos deben ser modificados
+    explícitamente para correr Xen (aunque manteniendo la
+    compatibilidad con aplicaciones de usuario). Esto permite a Xen
+    alcanzar virtualización de alto rendimiento sin un soporte
+    especial de hardware
+</p>
+<p>
+    Xen utiliza una técnica llamada paravirtualización para alcanzar
+    alto rendimiento. Con la paravirtualización, se puede alcanzar
+    alto rendimiento incluso en arquitecturas (x86) que no suelen
+    conseguirse con técnicas tradicionales de virtualización. A
+    diferencia de las máquinas virtuales tradicionales, que
+    proporcionan entornos basados en software para simular hardware,
+    Xen requiere portar los sistemas operativos para adaptarse al API
+    de Xen. Hasta el momento hay ports para NetBSD, Linux, FreeBSD y
+    Plan 9. En 2005, Novell muestra un port de NetWare para Xen. Un
+    port de Windows XP fue creado durante el desarrollo inicial de
+    Xen, pero las licencias de Microsoft prohíben su lanzamiento
+    público.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-7-4" class="outline-4">
+<h4 id="sec-7-4"><span class="section-number-4">7.4</span> OpenVZ</h4>
+<div class="outline-text-4" id="text-7-4">
+
+
+<p>
+    <i>OpenVZ</i> <sup><a class="footref" name="fnr-.11" href="#fn-.11">11</a></sup> es una tecnología de virtualización en el
+    nivel de sistema operativo para <i>Linux</i>. <i>OpenVZ</i> permite que un
+    servidor físico ejecute múltiples instancias de sistemas
+    operativos aislados, conocidos como Servidores Privados Virtuales
+    (SPV o VPS en inglés) o Entornos Virtuales (EV).
+</p>
+<p>
+    Si se lo compara a máquinas virtuales tales como <i>VMware</i>,
+    <i>VirtualBox</i> y las tecnologías de virtualización tales como <i>Xen</i>,
+    <i>OpenVZ</i> ofrece menor flexibilidad en la elección del sistema
+    operativo: tanto los huéspedes como los anfitriones deben ser
+    <i>Linux</i> (aunque las distribuciones de <i>GNU/Linux</i> pueden ser
+    diferentes en diferentes EVs). Sin embargo, la virtualización en
+    el nivel de sistema operativo de <i>OpenVZ</i> proporciona mejor
+    rendimiento, escalabilidad, densidad, administración de recursos
+    dinámicos, y facilidad de administración que las alternativas.
+</p>
+<p>
+    <i>OpenVZ</i> es una base de Virtuozzo que es un software comercial
+    desarrollado por SWsoft, Inc., <i>OpenVZ</i> es un producto de software
+    libre y licenciado bajo los términos de la licencia <i>GNU GPL</i>
+    versión 2.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-7-5" class="outline-4">
+<h4 id="sec-7-5"><span class="section-number-4">7.5</span> LXC</h4>
+<div class="outline-text-4" id="text-7-5">
+
+
+<p>
+    <i>LXC</i> <sup><a class="footref" name="fnr-.12" href="#fn-.12">12</a></sup> (Linux Containers) es una tecnología de
+    virtualización en el nivel de sistema operativo (<i>SO</i>) para
+    Linux. <i>OpenVZ</i> permite que un servidor físico ejecute múltiples
+    instancias de sistemas operativos aislados, conocidos como
+    Servidores Privados Virtuales (<i>SPV</i> o <i>VPS</i> en inglés) o Entornos
+    Virtuales (EV). <i>LXC</i> no provee de una máquina virtual, más bien
+    provee un entorno virtual que tiene su propio espacio de procesos
+    y redes.
+</p>
+<p>
+    Es similar a otras tecnologías de virtualización en el nivel de SO
+    como <i>OpenVZ</i> y <i>Linux-VServer</i>, asimismo se asemeja a aquellas de
+    otros sistemas operativos como <i>FreeBSD</i> jail y Solaris
+    Containers.
+</p>
+<p>
+    <i>LXC</i> se basa en la funcionalidad <code>cgroups</code> del <i>Linux</i> que está
+    disponible desde la versión 2.6.29, desarrollada como parte de
+    <i>LXC</i>. También se basa en otras funcionalidades de aislamiento de
+    espacio de nombres, que fueron desarrolladas e integradas dentro
+    de la línea principal del núcleo de <i>Linux</i>.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-8" class="outline-3">
+<h3 id="sec-8"><span class="section-number-3">8</span> Cómo Migrar?</h3>
+<div class="outline-text-3" id="text-8">
+
+
+<p>
+   La migración a GNU/Linux es un <b>proceso</b>, esto es, ha de hacerse en
+   etapas, concediendole a cada una, y concediendose el usuario, todo
+   el tiempo que necesiten ambos: la etapa y el usuario.
+</p>
+<ul>
+<li>Migran las personas, no los programas.
+</li>
+<li>Una migración compulsiva está destinada al fracaso.
+</li>
+</ul>
+
+
+<p>
+   En la primera parte, <b>A - Migrando al usuario</b>, hablamos del
+   protagonista de la migración: el usuario. En la segunda parte, <b>B -    Migrando programas</b>, veremos los muchos recursos para conocer,
+   probar y evaluar aplicaciones y distribuciones. En <b>C -    Capacitación</b> analizamos qué es lo que debe saber el usuario y cómo
+   adquirir ese conocimiento.  Contenidos:
+</p>
+<p>
+   A. Migrando al usuario
+   B. Migrando programas
+   C. Capacitación 
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-9" class="outline-3">
+<h3 id="sec-9"><span class="section-number-3">9</span> Créditos</h3>
+<div class="outline-text-3" id="text-9">
+
+
+<ul>
+<li>Todos los párrafos que hacen referencia a Wikipedia son obra
+     derivada de la misma bajo licencia GFDL <sup><a class="footref" name="fnr-.13" href="#fn-.13">13</a></sup>.
+</li>
+<li>La sección <b>Cómo Migrar</b> está extraído del sitio web de María
+     Elena Casañas <sup><a class="footref" name="fnr-.14" href="#fn-.14">14</a></sup>.
+</li>
+<li>El comienzo de la sección <b>Consola versus Escritorio</b> es obra
+     derivada del <b>Curso de administración básica GNU/Linux</b> de
+     Jesús David Navarro <sup><a class="footref" name="fnr-.15" href="#fn-.15">15</a></sup>.
+</li>
+<li>La sección <b>Copyleft</b> es obra derivada de <b>Un pequeño parche      para una sociedad minada de bugs</b> <sup><a class="footref" name="fnr-.16" href="#fn-.16">16</a></sup>.
+</li>
+<li>La sección <b>Aplicaciones Libres</b> es obra derivada de <b>Qué es el      software libre y porqué es importante para mi?</b> <sup><a class="footref" name="fnr-.17" href="#fn-.17">17</a></sup>.
+</li>
+<li>El resto del documento está bajo Licencia Creative Commons by-sa
+     Argentina 2.5 <sup><a class="footref" name="fnr-.18" href="#fn-.18">18</a></sup>.
+</li>
+</ul>
+
+
+<div id="footnotes">
+<h2 class="footnotes">Pies de p&aacute;gina: </h2>
+<div id="text-footnotes">
+<p class="footnote"><sup><a class="footnum" name="fn-.1" href="#fnr-.1">1</a></sup> <a href="http://es.wikipedia.org/wiki/Stallman">http://es.wikipedia.org/wiki/Stallman</a>
+</p>
+
+
+<p class="footnote"><sup><a class="footnum" name="fn-.2" href="#fnr-.2">2</a></sup> <a href="http://es.wikipedia.org/wiki/Gnu">http://es.wikipedia.org/wiki/Gnu</a>
+</p>
+
+
+<p class="footnote"><sup><a class="footnum" name="fn-.3" href="#fnr-.3">3</a></sup> <a href="http://es.wikipedia.org/wiki/FSF">http://es.wikipedia.org/wiki/FSF</a>
+</p>
+
+
+<p class="footnote"><sup><a class="footnum" name="fn-.4" href="#fnr-.4">4</a></sup> <a href="http://es.wikipedia.org/wiki/Linux">http://es.wikipedia.org/wiki/Linux</a>
+</p>
+
+
+<p class="footnote"><sup><a class="footnum" name="fn-.5" href="#fnr-.5">5</a></sup> <a href="http://es.wikipedia.org/wiki/Linus_Torvalds">http://es.wikipedia.org/wiki/Linus\_Torvalds</a>
+</p>
+
+
+<p class="footnote"><sup><a class="footnum" name="fn-.6" href="#fnr-.6">6</a></sup> <a href="http://es.wikipedia.org/wiki/GNU_General_Public_License">http://es.wikipedia.org/wiki/GNU\_General\_Public\_License</a>
+</p>
+
+
+<p class="footnote"><sup><a class="footnum" name="fn-.7" href="#fnr-.7">7</a></sup> <a href="http://es.wikipedia.org/wiki/Creative_commons">http://es.wikipedia.org/wiki/Creative\_commons</a>
+</p>
+
+
+<p class="footnote"><sup><a class="footnum" name="fn-.8" href="#fnr-.8">8</a></sup> <a href="http://es.wikipedia.org/wiki/QEMU">http://es.wikipedia.org/wiki/QEMU</a>
+</p>
+
+
+<p class="footnote"><sup><a class="footnum" name="fn-.9" href="#fnr-.9">9</a></sup> <a href="http://es.wikipedia.org/wiki/VirtualBox">http://es.wikipedia.org/wiki/VirtualBox</a>
+</p>
+
+
+<p class="footnote"><sup><a class="footnum" name="fn-.10" href="#fnr-.10">10</a></sup> <a href="http://es.wikipedia.org/wiki/Xen">http://es.wikipedia.org/wiki/Xen</a>
+</p>
+
+
+<p class="footnote"><sup><a class="footnum" name="fn-.11" href="#fnr-.11">11</a></sup> <a href="https://es.wikipedia.org/wiki/Openvz">https://es.wikipedia.org/wiki/Openvz</a>
+</p>
+
+
+<p class="footnote"><sup><a class="footnum" name="fn-.12" href="#fnr-.12">12</a></sup> <a href="https://es.wikipedia.org/wiki/LXC">https://es.wikipedia.org/wiki/LXC</a>
+</p>
+
+
+<p class="footnote"><sup><a class="footnum" name="fn-.13" href="#fnr-.13">13</a></sup> <a href="http://es.wikipedia.org/wiki/GFDL">http://es.wikipedia.org/wiki/GFDL</a>
+</p>
+
+
+<p class="footnote"><sup><a class="footnum" name="fn-.14" href="#fnr-.14">14</a></sup> <a href="http://casanas.com.ar/web.php?sec=como&amp;ssec=c1">http://casanas.com.ar/web.php?sec=como&amp;ssec=c1</a>
+</p>
+
+
+<p class="footnote"><sup><a class="footnum" name="fn-.15" href="#fnr-.15">15</a></sup> <a href="http://www.jesusda.com/docs/tallerintroadminlinux/s5-linux">http://www.jesusda.com/docs/tallerintroadminlinux/s5-linux</a>
+</p>
+
+
+<p class="footnote"><sup><a class="footnum" name="fn-.16" href="#fnr-.16">16</a></sup> <a href="http://jose.rebeldes.org.ar/wp-content/uploads/2007/04/copyleft_jose_flisol2007.pdf">http://jose.rebeldes.org.ar/wp-content/uploads/2007/04/copyleft\_jose\_flisol2007.pdf</a>
+</p>
+
+
+<p class="footnote"><sup><a class="footnum" name="fn-.17" href="#fnr-.17">17</a></sup> <a href="http://www.vialibre.org.ar/materiales/">http://www.vialibre.org.ar/materiales/</a>
+</p>
+
+
+<p class="footnote"><sup><a class="footnum" name="fn-.18" href="#fnr-.18">18</a></sup> <a href="http://creativecommons.org/licenses/by-sa/2.5/ar">http://creativecommons.org/licenses/by-sa/2.5/ar</a>
+</p></div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Fecha: 2013-04-08</p>
+<p class="author">Autor: Osiris Alejandro Gómez</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.2 with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 23</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>
