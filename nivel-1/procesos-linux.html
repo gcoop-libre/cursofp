@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+<title>Procesos Linux</title>
+<!-- 2013-04-17 mié 09:36 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="author" content="Osiris Alejandro Gomez"/>
+<meta name="description" content="Administrando recursos de sistema"/>
+<link rel="stylesheet" type="text/css" href="print.css"/>
+<link rel="stylesheet" type="text/css" href="../css/gumby.css"/>
+<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+    <div class='container'>
+<div class='row'>
+
+<div id="content">
+<h1 class="title">Procesos Linux</h1>
+<div id="table-of-contents">
+<h2>&Iacute;ndice</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. ¿Qué es proceso?</a></li>
+<li><a href="#sec-2">2. ¿Por qué?</a></li>
+<li><a href="#sec-3">3. Lo que el usuario ve:</a></li>
+<li><a href="#sec-4">4. Lo que el sistema ve:</a></li>
+<li><a href="#sec-5">5. <code>PID</code></a></li>
+<li><a href="#sec-6">6. Listar procesos</a></li>
+<li><a href="#sec-7">7. Operaciones</a></li>
+<li><a href="#sec-8">8. Jerarquía</a></li>
+<li><a href="#sec-9">9. En tiempo real</a></li>
+<li><a href="#sec-10">10. Resumen</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> ¿Qué es proceso?</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>Un proceso es la instancia de un programa en ejecución.
+</li>
+<li>También se lo conoce como tarea.
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> ¿Por qué?</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>GNU/Linux es un sistema multitarea, permite la ejecución de
+múltiples procesos al mismo tiempo.
+</li>
+
+<li>Comprender el concepto de procesos nos permite administrar el
+rendimiento de nuestro equipo.
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Lo que el usuario ve:</h2>
+<div class="outline-text-2" id="text-3">
+
+<div class="figure">
+<p><img src="img/cfp-procesos-01.png" width="640" alt="cfp-procesos-01.png"/></p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Lo que el sistema ve:</h2>
+<div class="outline-text-2" id="text-4">
+
+<div class="figure">
+<p><img src="img/cfp-procesos-03.png" width="640" alt="cfp-procesos-03.png"/></p>
+</div>
+
+
+<div class="figure">
+<p><img src="img/cfp-procesos-04.png" width="640" alt="cfp-procesos-04.png"/></p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> <code>PID</code></h2>
+<div class="outline-text-2" id="text-5">
+<ul class="org-ul">
+<li>Todo proceso que se inicia tiene un número asignado llamado
+     <b>PID</b>.
+</li>
+
+<li>Este <b>PID</b> permite identificar el proceso y administrarlo
+(detenerlo, reanudarlo etc&#x2026;)
+</li>
+
+<li>Ejemplo: Para obtener el <b>PID</b> de un proceso podemos usar el
+comando <code>pidof</code>:
+
+<div class="org-src-container">
+
+<pre class="src src-sh">pidof init emacs
+</pre>
+</div>
+
+<pre class="example">
+1 30184
+</pre>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Listar procesos</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+El comando <code>ps</code> puede listar el estado de los procesos:
+</p>
+
+
+<div class="figure">
+<p><img src="img/cfp-procesos-07.png" width="640" alt="cfp-procesos-07.png"/></p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Operaciones</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Los procesos se pueden controlar de manera externa.
+</p>
+
+<p>
+El comando <code>kill</code>, <code>xkill</code> o <code>killall</code> permite enviarle señales a
+los procesos. Por ejemplo la señal de terminación:
+</p>
+
+
+<div class="figure">
+<p><img src="img/cfp-procesos-08.png" width="640" alt="cfp-procesos-08.png"/></p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> Jerarquía</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+El comando pstree nos permite ver la organización de los procesos
+en ejecución:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">ps -fax | grep -A 10 bash | head
+</pre>
+</div>
+
+<pre class="example">
+ 2669 ?        S     47:11 /bin/bash /usr/share/siguibui/backend/shellserver.sh --daemon
+16783 ?        S      0:00  \_ sleep 1
+ 2676 ?        S      2:23 /usr/bin/python /usr/share/pywwetha/pywwetha.py --daemon
+ 2682 ?        Ss     0:00 /usr/sbin/acpi_fakekeyd
+ 2799 ?        Ss     0:19 /usr/sbin/acpid
+ 2989 ?        Ss     0:25 /usr/sbin/apache2 -k start
+ 3175 ?        S      0:00  \_ /usr/sbin/apache2 -k start
+ 3176 ?        S      0:00  \_ /usr/sbin/apache2 -k start
+ 3177 ?        S      0:00  \_ /usr/sbin/apache2 -k start
+ 3178 ?        S      0:00  \_ /usr/sbin/apache2 -k start
+</pre>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">pstree -p -U | head
+</pre>
+</div>
+
+<pre class="example">
+init(1)─┬─NetworkManager(3484)─┬─dhclient(14406)
+        │                      ├─{NetworkManager}(3503)
+        │                      └─{NetworkManager}(3670)
+        ├─SystemToolsBack(5731)
+        ├─accounts-daemon(3942)───{accounts-daemon}(3948)
+        ├─acpi_fakekeyd(2682)
+        ├─acpid(2799)
+        ├─apache2(2989)─┬─apache2(3175)
+        │               ├─apache2(3176)
+        │               ├─apache2(3177)
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> En tiempo real</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+Para visualizar los procesos en ejecución, también se puede usar
+<code>htop</code> o <code>top</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #729fcf;">export</span> <span style="color: #ff6347;">TERM</span>=linux
+top -b -n1 | head -20
+</pre>
+</div>
+
+<pre class="example">
+top - 09:36:32 up 8 days, 22:15,  7 users,  load average: 0,86, 0,93, 0,90
+Tasks: 198 total,   1 running, 197 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 14,4 us,  6,1 sy,  0,0 ni, 77,0 id,  1,6 wa,  0,6 hi,  0,3 si,  0,0 st
+KiB Mem:   2044852 total,  1907656 used,   137196 free,   136240 buffers
+KiB Swap:        0 total,        0 used,        0 free,   681620 cached
+
+  PID USER      PR  NI  VIRT  RES  SHR S  %CPU %MEM     TIME+ COMMAND
+16791 osiris    20   0 26096 1516 1080 R  11,7  0,1   0:00.03 top
+    1 root      20   0 10648  700  564 S   0,0  0,0   0:10.76 init
+    2 root      20   0     0    0    0 S   0,0  0,0   0:02.54 kthreadd
+    3 root      20   0     0    0    0 S   0,0  0,0  13:05.86 ksoftirqd/0
+    6 root      rt   0     0    0    0 S   0,0  0,0   0:00.00 migration/0
+    7 root      -2   0     0    0    0 S   0,0  0,0   3:19.31 rcuc/0
+    8 root      rt   0     0    0    0 S   0,0  0,0   0:00.00 rcun/0
+    9 root      -2   0     0    0    0 S   0,0  0,0   0:00.00 rcub/0
+   10 root      rt   0     0    0    0 S   0,0  0,0   0:00.00 rcun/1
+   11 root      -2   0     0    0    0 S   0,0  0,0   0:00.00 rcub/1
+   12 root      rt   0     0    0    0 S   0,0  0,0   0:00.00 migration/1
+   14 root      -2   0     0    0    0 S   0,0  0,0   4:54.16 rcuc/1
+   15 root      20   0     0    0    0 S   0,0  0,0  12:17.54 ksoftirqd/1
+</pre>
+
+
+<div class="figure">
+<p><img src="img/cfp-procesos-11.png" width="640" alt="cfp-procesos-11.png"/></p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> Resumen</h2>
+<div class="outline-text-2" id="text-10">
+<ul class="org-ul">
+<li>Los procesos son instancias de programas en funcionamiento.
+</li>
+<li>Los recursos del sistema son limitados, el sistema administra y
+hace posible compartir recursos.
+</li>
+<li>Cada proceso tiene un identiﬁcador (<code>PID</code>), que nos sirve para
+enviar señales.
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Fecha: 2012-11-06</p>
+<p class="author">Autor: Osiris Alejandro Gomez</p>
+<p class="date">Created: 2013-04-17 mié 09:36</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 23.4.1 (<a href="http://orgmode.org">Org</a> mode 8.0-pre)</p>
+<p class="xhtml-validation"><a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a></p>
+</div>
+</div>
+</div>
+</body>
+</html>
