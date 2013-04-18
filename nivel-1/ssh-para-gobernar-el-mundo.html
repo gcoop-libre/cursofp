@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+<title>SSH para gobernar el mundo!</title>
+<!-- 2013-04-18 jue 09:54 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="author" content="Osiris Alejandro Gomez"/>
+<link rel="stylesheet" type="text/css" href="print.css"/>
+<link rel="stylesheet" type="text/css" href="../css/gumby.css"/>
+<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+</head>
+<body>
+<div id="preamble">
+</div>
+    <div class='container'>
+<div class='row'>
+
+<div id="content">
+<h1 class="title">SSH para gobernar el mundo!</h1>
+<div id="table-of-contents">
+<h2>&Iacute;ndice</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. ¿qué es <code>ssh</code> y para qué sirve?</a></li>
+<li><a href="#sec-2">2. ¿qué ventajas tiene?</a></li>
+<li><a href="#sec-3">3. ¿qué necesito para usar SSH?</a></li>
+<li><a href="#sec-4">4. ¿cómo me conecto por SSH?</a></li>
+<li><a href="#sec-5">5. ¿qué sucede la primera vez?</a></li>
+<li><a href="#sec-6">6. Listo, entré a la matrix! ¿y ahora?</a></li>
+<li><a href="#sec-7">7. El intruso va por la revancha!</a></li>
+<li><a href="#sec-8">8. Eliminando al intruso!</a></li>
+<li><a href="#sec-9">9. El intruso es duro de domar!</a></li>
+<li><a href="#sec-10">10. ¿Y ahora quién podrá defendernos?</a></li>
+<li><a href="#sec-11">11. Controlando la matrix!</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> ¿qué es <code>ssh</code> y para qué sirve?</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<code>ssh</code> permite la ejecución remota de un intérprete de comandos
+como <code>bash</code>
+</p>
+
+<ul class="org-ul">
+<li>Más información en: <a href="https://es.wikipedia.org/wiki/Ssh">https://es.wikipedia.org/wiki/Ssh</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> ¿qué ventajas tiene?</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li><b>Es seguro</b> porque cifra la conexión y nadie puede ver qué
+estamos haciendo
+</li>
+<li><b>Es rápido</b> porque sólo envía texto, por ello envía menos datos
+que si fuera una imagen de pantalla como programas como <code>vnc</code>
+</li>
+<li><b>Es versátil</b> porque permite interactuar con otros comandos
+obteniendo control total de un sistema de manera remota.
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> ¿qué necesito para usar SSH?</h2>
+<div class="outline-text-2" id="text-3">
+<ul class="org-ul">
+<li><i>computadora remota</i>
+<ul class="org-ul">
+<li><b>servidor SSH</b>
+<ul class="org-ul">
+<li>se instala haciendo:
+<pre class="example">
+sudo apt-get install openssh-server
+</pre>
+</li>
+</ul>
+</li>
+<li><b>conexión a la red</b> (si es internet mejor!)
+</li>
+<li><b>puerto 22 abierto</b> (OjO con el firewall)
+</li>
+<li>que la computadora esté encendida! (aunque más adelante
+veremos cómo encender remotamente una computadora)
+</li>
+</ul>
+</li>
+<li><i>computadora local</i>
+<ul class="org-ul">
+<li><b>cliente ssh</b>
+<ul class="org-ul">
+<li>en todos los linux <b>ya está instalado</b>!
+</li>
+<li>en otros sistemas pod usar <a href="https://es.wikipedia.org/wiki/PuTTY">PuTTY</a>
+<ul class="org-ul">
+<li><a href="https://es.wikipedia.org/wiki/PuTTY">https://es.wikipedia.org/wiki/PuTTY</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><b>dirección IP</b> de computadora remota
+</li>
+<li><b>usuario válido</b> de computadora remota
+</li>
+<li><b>contraseña</b> del usuario de la computadora remota
+</li>
+<li>que el <b>puerto 22 de salida esté habilitado</b> en el firewall
+(aunque hay trucos para saltearlo)
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> ¿cómo me conecto por SSH?</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+En una terminal hay que escribir el comando <code>ssh</code> luego el
+usuario remoto, por ejemplo: <b>pepe</b> y separado por un <b>@</b> arroba
+la dirección <b>IP</b> o el dominio (ej: <code>192.168.0.9</code> ó <code>osiux.com</code>)
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">ssh pepe@192.168.0.9
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> ¿qué sucede la primera vez?</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Siempre que nos conectamos por primera vez a un servidor SSH, nos
+aparece un mensaje para que confirmemos la autenticidad de la
+computadora a la que estamos conectándonos, por ahora somos
+confiados y le decimos que sí, tipeando <b>yes</b>
+</p>
+
+<pre class="example">
+osiris@osiux.com:/home/osiris# ssh 192.168.0.9
+The authenticity of host 'lab2 (192.168.0.9)' can't be established.
+RSA key fingerprint is e1:92:a3:54:95:e6:67:b8:89:80:11:02:93:f4:05:36.
+Are you sure you want to continue connecting (yes/no)?
+</pre>
+
+<ul class="org-ul">
+<li>Las próximas veces este paso no es necesario.
+</li>
+<li>Luego ingresamos la contraseña (password en inglés) y si es
+correcta, ingresamos al sistema remoto!
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Listo, entré a la matrix! ¿y ahora?</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Ahora podemos hacer todo lo que el usuario que usamos para
+conectarnos (en este caso <b>pepe</b>) pueda hacer!
+</p>
+
+<p>
+Ahora bien, resulta que este sistema remoto cuenta con un
+administrador, que ve que alguien que no es él, ingresó al
+sistema con su usuario! Entonces va a matar todos los procesos
+del usuario <b>pepe</b>, a fin de dejarnos afuera del sistema.
+</p>
+
+<p>
+Para esto, utiliza la herramienta <code>htop</code> que muestra todos los
+procesos y presionando la tecla <code>F4</code> nos permite filtrar por la
+palabra <b>pepe</b> y luego presionando <code>F9</code> y eligiendo <code>SIGKILL</code>
+termina cada uno de los procesos del usuario <b>pepe</b>.
+</p>
+
+<p>
+También se puede hacer desde la consola sin usar <code>htop</code>
+</p>
+
+<pre class="example">
+root@lab2:/# pkill -u pepe
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> El intruso va por la revancha!</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Como lo dejamos afuera a <b>pepe</b> matando sus procesos, ahora está
+enojado! Entonces nos empieza a crear <b>carpetas</b> en
+el <b>Escritorio</b> de la siguiente manera:
+</p>
+
+<pre class="example">
+pepe@lab2:~/$ cd Escritorio
+pepe@lab2:~/$ mkdir aguante
+pepe@lab2:~/$ mkdir la
+pepe@lab2:~/$ mkdir academia
+</pre>
+
+<p>
+Si sigue así en algún momento nos va a llenar el <b>Escritorio</b>
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> Eliminando al intruso!</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Matar los procesos activos no es suficiente, debemos eliminar al
+usuario, para esto hacemos:
+</p>
+
+<pre class="example">
+root@lab2:/# deluser pepe
+</pre>
+
+<ul class="org-ul">
+<li>Listo! ahora <b>pepe</b> no puede ingresar a nuestro sistema
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> El intruso es duro de domar!</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+Resulta que <b>pepe</b> cuando ingresó la primera vez, fue astuto y
+cambió la contraseña de <b>root</b>. ¿Y cómo pudo hacerlo? es simple,
+el usuario <b>pepe</b> tenía permisos para usar <b>sudo</b> que permite
+convertirse en <b>root</b> (y ser el <b>DIOS</b> del sistema).
+Para cambiar la password hizo lo siguiente:
+</p>
+
+<pre class="example">
+pepe@lab2:~/$ sudo -s
+[sudo] password for pepe: 
+root@lab2:/#
+
+root@lab2:/# passwd
+Cambiando la contraseña de root.
+Introduzca la nueva contraseña de UNIX: 
+Vuelva a escribir la nueva contraseña de UNIX:
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> ¿Y ahora quién podrá defendernos?</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+Si un intruso logró obtener cuenta <b>root</b>, estamos fritos! tiene
+completo control del sistema y sin que nos demos cuenta, salvo
+que haga algo muy evidente como borrar todo el disco, va a pasar
+desapercibido. Qué podemos hacer, para evitar esto?
+</p>
+
+<ul class="org-ul">
+<li>Utilizar contraseñas fuertes, usando <code>md5</code> por ejemplo:
+<pre class="example">
+echo -n maradona | md5sum
+8b123b7a7cf86f5aa9424d1f379384d8
+</pre>
+</li>
+<li>Mucho más fácil de recordar, frases de paso:
+<pre class="example">
+Se te escapo la tortuga!
+</pre>
+</li>
+<li>NO usar la misma contraseña en todos lados!
+</li>
+<li>NO usar <b>sudo</b>, loguearse como <b>root</b> sólo para tareas
+administrativas
+</li>
+<li>NO permitir el login del usuario <b>root</b>
+</li>
+<li>Sólo permitir login por <i>SSH</i> desde algunas IPs
+</li>
+
+<li>OjO: aunque quitando el cable de red, basta para desconectar a
+los intrusos, hoy día casi que vuelve inservible una compu
+desconectada del mundo!
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-11" class="outline-2">
+<h2 id="sec-11"><span class="section-number-2">11</span> Controlando la matrix!</h2>
+<div class="outline-text-2" id="text-11">
+<p>
+Si bien usamos el ejemplo de un intruso, lo más probable es que
+nosotros seamos root en muchos otros sistemas, como la compu del
+trabajo, la de casa, la de un amigo/a, etc. Y poder administrar
+varios sistemas remotos usando <i>SSH</i> u una sola terminal es
+posible.
+</p>
+
+<p>
+Para esto instalamos <b>Terminator</b>
+</p>
+<pre class="example">
+sudo apt-get install terminator
+</pre>
+
+<p>
+Iniciamos <b>Terminator</b> y presionando <b>CTRL-SHIFT-E</b> y <b>CTRL-SHIFT-O</b>
+podemos dividir la pantalla vertical y horizontalmente tantas
+veces como sea necesario, obteniendo muchas terminales dentro de
+una sola y eligiendo la opción <b>retransmitir a todas</b> podemos
+tipear una sola vez y que ese comando vaya a todas las terminales
+conectadas! :-D
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Autor: Osiris Alejandro Gomez</p>
+<p class="date">Created: 2013-04-18 jue 09:54</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 23.4.1 (<a href="http://orgmode.org">Org</a> mode 8.0-pre)</p>
+<p class="xhtml-validation"><a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a></p>
+</div>
+</div>
+</div>
+</body>
+</html>
