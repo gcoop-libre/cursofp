@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+<title>Automatizando Tareas</title>
+<!-- 2013-04-24 mié 02:32 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="author" content="Osiris Alejandro Gomez"/>
+<meta name="description" content="Manejo de crontab, watch y scripts"/>
+<link rel="stylesheet" type="text/css" href="print.css"/>
+<link rel="stylesheet" type="text/css" href="../css/gumby.css"/>
+<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+</head>
+<body>
+<div id="preamble">
+</div>
+    <div class='container'>
+<div class='row'>
+<div id="content">
+<h1 class="title">Automatizando Tareas</h1>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Procesos padres e hijos</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Cada vez que ejecutamos un comando en una terminal, éste comando
+se convierte en un proceso hijo de la terminal que estamos
+ejecutando.  Por ejemplo, si estamos en la interfase gráfica, la
+terminal sería <b>gnome-terminal</b> quien a su vez invoca al
+intérprete <b>bash</b> y desde ahí podríamos invocar a <b>firefox</b>. Esto
+se puede visualizar de la siguiente manera:
+</p>
+
+<pre class="example">
+# ps fax | grep -C3 firefox
+
+ 4444 ?        Ssl    0:13 gnome-terminal
+ 4453 ?        Z      0:00  \_ gnome-pty-helper
+ 4454 pts/10   Ss     0:00  \_ bash
+ 4509 pts/10   S+     0:52      \_ firefox
+ 6347 pts/13   Ss     0:00  \_ bash
+11781 pts/13   S+     0:01  |   \_ ps fax
+11782 pts/13   S+     0:01  |   \_ grep -C3 firefox
+</pre>
+
+<p>
+Lo que vemos es el árbol de ejecución de procesos y si cerramos
+la terminal, también se cerraría <b>firefox</b> por depender del
+proceso <b>terminal</b>.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Para mí, vos estás en segundo plano</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Al ejecutar un comando en una terminal, por ejemplo <b>top</b>, este
+comando pasa a estar en primer plano y hasta que no interrumpamos
+el comando presionando <b>CTRL-C</b> o saliendo del mismo mediante la
+tecla <b>q</b>, no se puede ejecutar ningún otro comando en el misma
+terminal. Para solucionar este inconveniente es posible pasar el
+proceso a <b>segundo plano</b>, para esto sólo basta
+presionar <b>CTRL-Z</b>, lo cual nos devuelve el <b>PROMPT</b> de la
+terminal para que invoquemos nuevos comandos.
+</p>
+
+<p>
+Es posible visualizar la lista de tareas mediante el
+comando <b>jobs</b>, en este caso nos mostraría que está detenido:
+</p>
+
+<pre class="example">
+# jobs
+[1]+  Detenido                top
+</pre>
+
+<p>
+Para recuperar la ejecución de <b>top</b> podemos escribir <b>fg</b> que
+significa <b>foreground</b> o sea, pasar a primer plano.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">Sos tan lento&#x2026; que no te quiero ver</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+También se puede enviar a segundo plano un comando ni bien lo
+invocamos, generalmente esto, se hace con comandos que sabemos
+que van a tardar mucho, como por ejemplo listar todos los
+archivos que hay en el disco rígido y enviarlo a un archivo, para
+esto solo basta agregar el caracter <b>&amp;</b> o <b>ampersand</b> al final de
+un comando:
+</p>
+
+<pre class="example">
+# find / &gt;/tmp/archivos.log &amp;
+</pre>
+
+<p>
+De esta manera, el comando <b>find</b> lista todos los archivos que se
+encuentran en la raíz <b>/</b> y los envía a un archivo usando <b>&gt;</b>.
+</p>
+
+<p>
+Podemos ver que el total de líneas del archivo crece mediante el
+comando <b>wc</b>:
+</p>
+
+<pre class="example">
+# wc -l /tmp/archivos.log
+</pre>
+
+<p>
+Algunos comandos ya incluyen una función de segundo plano, por
+ejemplo <b>wget</b> que sirve para descargar archivos, mediante el
+parámetro <b>-b</b> redirecciona la salida del comando al
+archivo <b>wget-log</b> y nos permite seguir trabajando.
+</p>
+
+<pre class="example">
+# wget -b http://releases.ubuntu.com/precise/ubuntu-12.04.1-desktop-i386.iso
+Continuando en segundo plano, pid 12949.
+La salida será escrita a “wget-log”.
+</pre>
+
+<p>
+Para visualizar si se completó la descargar, solo basta mirar el
+archivo <b>wget-log</b>, en la última línea debería decir 100%:
+</p>
+
+<pre class="example">
+  cat ~/wget-log
+
+--2012-10-29 18:28:50--  http://releases.ubuntu.com/precise/ubuntu-12.04.1-desktop-i386.iso
+Resolviendo localhost (localhost)... 127.0.0.1
+Conectando con localhost (localhost)[127.0.0.1]:8123... conectado.
+Petición Proxy enviada, esperando respuesta... 200 OK
+Longitud: 729067520 (695M) [application/x-iso9660-image]
+Grabando a: “ubuntu-12.04.1-desktop-i386.iso”
+
+     0K .......... .......... .......... .......... ..........  0% 24,7K 8h0m
+    50K .......... .......... .......... .......... ..........  0% 68,8K 5h26m
+   100K .......... .......... .......... .......... ..........  0% 61,5K 4h41m
+   150K .......... .......... .......... .......... ..........  0% 66,8K 4h15m
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">Esta compu, se destruye en 5 minutos!</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+En ocasiones es necesario ejecutar algún comando dentro de cierto
+tiempo, por ejemplo dentro de 5 minutos, para ello se puede
+utilizar <b>sleep</b>, luego se ingresa el tiempo usando <b>s</b> para
+segundos, <b>m</b> para minutos y <b>h</b> para horas:
+</p>
+
+<pre class="example">
+# sleep 5m; reboot
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">Tengo un crontab para no olvidar nada</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Mediante el uso del <b>crontab</b> es posible definir la ejecución de
+tareas de manera específica.
+</p>
+
+<p>
+Es posible entonces programar una tarea de manera diaria,
+semanal, mensual, etc:
+</p>
+
+<pre class="example">
+# Usar numeral para escribir comentarios
+# +---------------- minutos (0 - 59)
+# |  +------------- horas (0 - 23)
+# |  |  +---------- día del mes (1 - 31)
+# |  |  |  +------- mes (1 - 12)
+# |  |  |  |  +---- día de la semana (0 - 7) (Domingo=0 or 7)
+# |  |  |  |  |
+# *  *  *  *  *     comando a ejecutar
+
+*/5  *  *  *  *     /root/cada-5-minutos.sh
+  0 23  *  *  *     /root/backup-diario.sh
+  0  0  1  *  *     /root/backup-mensual.sh
+  0 23 31 12  *     /root/backup-anual.sh
+  0 12  *  *  0     DISPLAY=:0.0 /usr/bin/notify-send "asadito"
+  0 12 29  *  *     DISPLAY=:0.0 /usr/bin/notify-send "ñoquis"
+</pre>
+
+<p>
+Para editar, ejecutar:
+</p>
+<pre class="example">
+# crontab -e
+</pre>
+
+<p>
+Para listar, ejecutar:
+</p>
+<pre class="example">
+# crontab -l
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">Robotizando el mouse</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Muchas veces, puede resultar muy útil automatizar tareas de la
+interfase gráfica pero usando una terminal, para esto es
+necesario instalar <b>xautomation</b>:
+</p>
+
+<pre class="example">
+# sudo apt-get install xautomation
+</pre>
+
+<p>
+Una vez instalado, es posible mover el mouse y hacer click en un
+lugar determinado de la pantalla de la siguiente manera:
+</p>
+
+<pre class="example">
+# xte 'mousemove 100 300'; xte 'mouseclick 1'
+</pre>
+
+<p>
+La orden <b>mousemove 100 300</b> hace que el mouse se mueva a la
+posicion 100 en el eje X, o sea a 100 pixels de la esquina
+izquiera del monitor, de igual manera a 300 pixels en el eje Y.
+</p>
+
+<p>
+La orden <b>mouseclick 1</b> emula un click en el botón izquierdo del
+mouse.
+</p>
+
+<p>
+Imaginemos que por algún motivo, necesitamos movernos a un lugar
+en la pantalla y hacer muchos clicks, por ejemplo para avanzar de
+página en internet y queremos capturar la pantalla antes de hacer
+click y asi guardar lo que se está mostrando.
+</p>
+
+<p>
+Entonces necesitamos instalar un capturador de pantalla que
+funcione desde la terminal, por ejemplo <b>scrot</b>:
+</p>
+
+<pre class="example">
+# sudo apt-get install scrot
+</pre>
+
+<p>
+Ahora bien, ya sabemos movernos por la pantalla, hacer click y
+tenemos un comando que captura la pantalla, sólo bastaría hacer
+un pequeño programa que repita la operación, por ejemplo 186
+veces!:
+</p>
+
+<pre class="example">
+# for i in {1..186};do scrot; xte 'mousemove 100 300'; xte 'mouseclick 1'; sleep 3s;done
+</pre>
+
+<p>
+Listo, en una sóla línea es posible definirlo, basta con
+presionar <b>ENTER</b> y vamos a obtener 186 imágenes distintas.
+</p>
+
+<p>
+Veamos que hace cada línea, paso a paso:
+</p>
+
+<pre class="example">
+for i in {1..186}  # incrementa el valor de i desde 1 a 186
+do # inicia la ejecucion
+    scrot # captura la pantalla
+    xte 'mousemove 100 300' # mueve el mouse a la posicion 100,300
+    xte 'mouseclick 1' # presiona click izquierdo del mouse
+    sleep 3s # espera 3 segundos
+done # termina la ejecucion
+</pre>
+
+<p>
+De esta simple manera, se pueden automatizar muchísimas tareas!
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Osiris Alejandro Gomez (<a href="mailto:osiux@osiux.com">osiux@osiux.com</a>)</p>
+<p class="date">Date: </p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 23.4.1 (<a href="http://orgmode.org">Org</a> mode 8.0)</p>
+<p class="xhtml-validation"><a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a></p>
+</div>
+</div>
+</div>
+</body>
+</html>

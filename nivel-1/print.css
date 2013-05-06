@@ -41,7 +41,7 @@ span.underline{text-decoration:underline;}
 .timestamp-kwd{color:#f59ea0;}
 .tag{background-color:#add8e6;font-weight:normal}
 .target{background-color:#551a8b;}
-pre{border:1pt solid black;background-color:white;padding:4pt;font-family:inconsolata, courier, monospace;font-size:110%;white-space:pre-wrap;}
+pre{border:1pt solid black;background-color:white;padding:4pt;font-family:inconsolata, courier, monospace;font-size:105%;white-space:pre-wrap;}
 table{border-collapse:collapse;}
 td, th{vertical-align:top;}
 .org-info-search-highlight{background-color:#adefef;color:#000000;font-weight:bold;}
