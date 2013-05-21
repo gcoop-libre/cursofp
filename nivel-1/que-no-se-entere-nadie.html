@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+<title>Que no se entere nadie!</title>
+<!-- 2013-04-24 mié 02:30 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="author" content="Osiris Alejandro Gomez"/>
+<meta name="description" content="Análisis de tráfico de red mediante tcpdump"/>
+<link rel="stylesheet" type="text/css" media="screen, print" href="print.css"/>
+<link rel="stylesheet" type="text/css" media="screen" href="../css/gumby.css"/>
+<link rel="stylesheet" type="text/css" media="screen" href="../css/style.css"/>
+</head>
+<body>
+<div id="preamble">
+</div>
+    <div class='container'>
+<div class='row'>
+<div id="content">
+<h1 class="title">Que no se entere nadie!</h1>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">la era de la inocencia</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Iniciamos Firefox como es costumbre de todos los días y empezamos
+a saltar de un sitio web a otro. Nada extraño sucede, leemos y
+escribimos comentarios, ingresamos a algún chat, en fin nos
+comunicamos con otras personas a través de la red.
+</p>
+
+<p>
+Suponemos que debido a que estamos solos frente a la compu, nadie
+más está viendo todo lo que enviamos y recibimos a través de la
+red&#x2026; :-S
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">olfateando la red</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Si mientras estamos usando la red, se nos ocurre ver qué datos
+pasan a través de la red, sólo necesitamos usar  <code>tcpdump</code>:
+</p>
+
+<pre class="example">
+sudo apt-get install tcpdump
+</pre>
+
+<p>
+Su uso es muy simple, solo basta indicar la interfaz de red:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo tcpdump -i eth2
+</pre>
+</div>
+
+<p>
+El resultado es similar al siguiente:
+</p>
+
+<pre class="example">
+10:09:54.261674 IP malbec.ssh &gt; osiale.gcoop.com.ar.49322: Flags [P.], seq 2750542384:2750543808, ack 4116367059, win 1331, options [nop,nop,TS val 20388916 ecr 20607900], length 1424
+10:09:54.261748 IP osiale.gcoop.com.ar.49322 &gt; malbec.ssh: Flags [.], ack 1424, win 1321, options [nop,nop,TS val 20607950 ecr 20388916], length 0
+10:09:54.263027 IP osiale.gcoop.com.ar.46685 &gt; malbec.domain: 7023+ PTR? 18.1.168.192.in-addr.arpa. (45)
+10:09:54.263195 IP malbec.domain &gt; osiale.gcoop.com.ar.46685: 7023* 1/0/0 PTR osiale.gcoop.com.ar. (78)
+10:09:54.540654 IP malbec.ssh &gt; osiale.gcoop.com.ar.49322: Flags [P.], seq 1424:2512, ack 1, win 1331, options [nop,nop,TS val 20388986 ecr 20607950], length 1088
+10:09:54.540690 IP osiale.gcoop.com.ar.49322 &gt; malbec.ssh: Flags [.], ack 2512, win 1321, options [nop,nop,TS val 20608019 ecr 20388986], length 0
+10:09:54.606095 IP osiale.gcoop.com.ar.48150 &gt; malbec.domain: 29621+ A? daisy.ubuntu.com. (34)
+10:09:54.606229 IP malbec.domain &gt; osiale.gcoop.com.ar.48150: 29621 2/0/0 A 91.189.95.55, A 91.189.95.54 (66)
+10:09:54.785237 IP malbec.ssh &gt; osiale.gcoop.com.ar.49322: Flags [.], seq 2512:3960, ack 1, win 1331, options [nop,nop,TS val 20389047 ecr 20608019], length 1448
+10:09:54.785281 IP osiale.gcoop.com.ar.49322 &gt; malbec.ssh: Flags [.], ack 3960, win 1321, options [nop,nop,TS val 20608081 ecr 20389047], length 0
+</pre>
+
+<p>
+Lo que vemos, es la información del encabezado de cada paquete
+que pasa por la interfaz de red, en este caso <code>eth2</code>.
+</p>
+
+<p>
+Si no sabemos qué interfaz de red utilizar o simplemente ver
+cuáles están disponibles, usamos el comando <code>ifconfig</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">ifconfig
+</pre>
+</div>
+
+<p>
+Veríamos un listado similar al siguiente:
+</p>
+
+<pre class="example">
+eth0      Link encap:Ethernet  direcciónHW 00:15:d2:19:5b:7d  
+          ACTIVO DIFUSIÓN MULTICAST  MTU:1500  Métrica:1
+          Paquetes RX:0 errores:0 perdidos:0 overruns:0 frame:0
+          Paquetes TX:0 errores:0 perdidos:0 overruns:0 carrier:0
+          colisiones:0 long.colaTX:1000 
+          Bytes RX:0 (0.0 B)  TX bytes:0 (0.0 B)
+          Interrupción:19 Dirección base: 0xa000 
+
+eth2      Link encap:Ethernet  direcciónHW 00:15:84:2b:6b:8e  
+          Direc. inet:192.168.1.18  Difus.:192.168.1.255  Másc:255.255.255.0
+          Dirección inet6: fe80::215:84ff:fe2b:6b8e/64 Alcance:Enlace
+          ACTIVO DIFUSIÓN FUNCIONANDO MULTICAST  MTU:1500  Métrica:1
+          Paquetes RX:632042 errores:0 perdidos:0 overruns:0 frame:0
+          Paquetes TX:647823 errores:0 perdidos:0 overruns:0 carrier:0
+          colisiones:0 long.colaTX:1000 
+          Bytes RX:207733278 (207.7 MB)  TX bytes:291419413 (291.4 MB)
+          Interrupción:18 Dirección base: 0xc800 
+
+lo        Link encap:Bucle local  
+          Direc. inet:127.0.0.1  Másc:255.0.0.0
+          Dirección inet6: ::1/128 Alcance:Anfitrión
+          ACTIVO BUCLE FUNCIONANDO  MTU:16436  Métrica:1
+          Paquetes RX:186169 errores:0 perdidos:0 overruns:0 frame:0
+          Paquetes TX:186169 errores:0 perdidos:0 overruns:0 carrier:0
+          colisiones:0 long.colaTX:0 
+          Bytes RX:37061384 (37.0 MB)  TX bytes:37061384 (37.0 MB)
+</pre>
+
+<p>
+En este caso contamos con <code>eth0</code>, <code>eth2</code> y <code>lo</code> que es la interfaz local.
+Como se puede ver, la <code>eth2</code> tiene la dirección <b>IP</b> <code>192.168.1.18</code>.
+</p>
+
+<p>
+Si quisieramos ver las <b>IPs</b> y los números de puertos en lugar de
+los nombres de dominio y servicios asociados, debemos usar el
+parámetro <code>-n</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo tcpdump -i eth2 -n
+</pre>
+</div>
+
+<p>
+Ahora se reemplaza <code>osiale.gcoop.com.ar</code> por <code>192.168.1.18</code>,
+<code>ssh</code> por <code>22</code>, <code>domain</code> por <code>53</code> y <code>malbec</code> por <code>192.168.1.1</code>:
+</p>
+
+<pre class="example">
+10:09:54.261674 IP 192.168.1.1.22 &gt; 192.168.1.18.49322: Flags [P.], seq 2750542384:2750543808, ack 4116367059, win 1331, options [nop,nop,TS val 20388916 ecr 20607900], length 1424
+10:09:54.261748 IP 192.168.1.18.49322 &gt; 192.168.1.1.22: Flags [.], ack 1424, win 1321, options [nop,nop,TS val 20607950 ecr 20388916], length 0
+10:09:54.263027 IP 192.168.1.18.46685 &gt; 192.168.1.1.53: 7023+ PTR? 18.1.168.192.in-addr.arpa. (45)
+10:09:54.263195 IP 192.168.1.1.53 &gt; 192.168.1.18.46685: 7023* 1/0/0 PTR 192.168.1.18. (78)
+10:09:54.540654 IP 192.168.1.1.22 &gt; 192.168.1.18.49322: Flags [P.], seq 1424:2512, ack 1, win 1331, options [nop,nop,TS val 20388986 ecr 20607950], length 1088
+10:09:54.540690 IP 192.168.1.18.49322 &gt; 192.168.1.1.22: Flags [.], ack 2512, win 1321, options [nop,nop,TS val 20608019 ecr 20388986], length 0
+10:09:54.606095 IP 192.168.1.18.48150 &gt; 192.168.1.1.53: 29621+ A? daisy.ubuntu.com. (34)
+10:09:54.606229 IP 192.168.1.1.53 &gt; 192.168.1.18.48150: 29621 2/0/0 A 91.189.95.55, A 91.189.95.54 (66)
+10:09:54.785237 IP 192.168.1.1.22 &gt; 192.168.1.18.49322: Flags [.], seq 2512:3960, ack 1, win 1331, options [nop,nop,TS val 20389047 ecr 20608019], length 1448
+10:09:54.785281 IP 192.168.1.18.49322 &gt; 192.168.1.1.22: Flags [.], ack 3960, win 1321, options [nop,nop,TS val 20608081 ecr 20389047], length 0
+</pre>
+
+<p>
+El tráfico de red que capturamos depende mucho de en que lugar de
+la red estamos parados, no es lo mismo hacerlo desde un punto
+terminal que hacerlo entre un <b>router</b> y un <b>switch</b> o desde
+el <b>gateway</b> de salida a internet de toda la red. En los puntos
+donde se concentran todas conexiones vamos va ver el tráfico de
+más máquinas, es decir más personas!
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">mirando en profundidad</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Es posible el contenido de los paquetes en formato ASCII mediante
+el parámetro <code>-A</code>, indicar la cantidad de paquetes a capturar con
+<code>-c</code> y aplicar filtros, como por ejemplo que solo nos interesar
+capturar el tráfico que enviamos a los sitios web, o sea filtrar
+por puerto de destino <code>80</code>.
+</p>
+
+<p>
+La sentencia sería la siguiente:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">tcpdump -i eth2 -n -A -c 1 dst port 80
+</pre>
+</div>
+
+<p>
+En este caso logramos capturar la consulta al sitio <code>osiux.com</code>
+que corresponde a la <b>IP</b> <code>67.208.113.123</code> y puerto <code>80</code>, para
+esto se está usando un <code>Firefox</code> versión <code>15.0.1</code> en una máquina
+con <code>Ubuntu</code> y el idioma preferido es <code>es_ar</code> (Español,
+Argentina).
+</p>
+
+<p>
+En este caso, el que realiza la consulta es la <b>IP</b>
+<code>192.168.1.18</code> desde el puerto <code>57935</code>.
+</p>
+
+<pre class="example">
+10:49:31.622425 IP 192.168.1.18.57935 &gt; 67.208.113.123.80: Flags [P.], seq 3592177738:3592178048, ack 4115460638, win 457, options [nop,nop,TS val 21202290 ecr 455625744], length 310
+E..j..@.@.....
+.C.q{.O.P..HJ.L............
+.C.r.(L.GET / HTTP/1.1
+Host: osiux.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: es-ar,es;q=0.8,en-us;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+</pre>
+
+<p>
+Es muchísima información la que se puede obtener con observar un
+sólo paquete de red!
+</p>
+
+<p>
+Entonces podemos saber:
+</p>
+
+<ul class="org-ul">
+<li>qué sitios se visitan
+</li>
+<li>quiénes los miran
+</li>
+<li>qué escriben
+</li>
+<li>qué leen
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">y si chateamos?</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Probemos que sucede si chateamos en la red local, sin salir a
+Internet. Para esto, usamos <b>Pidgin</b>, un programa que soporta
+casi todos los protocolos y servicios de chat existentes.
+</p>
+
+<p>
+Primero instalamos <b>Pidgin</b>:
+</p>
+
+<pre class="example">
+sudo apt-get install pidgin
+</pre>
+
+<p>
+Luego lo iniciamos, escribiendo <code>pidgin</code> en una terminal o lo
+buscamos en el menú de la interfaz gráfica, debería estar
+en <b>Aplicaciones-&gt;Internet-&gt;Pidgin</b>
+</p>
+
+<p>
+Al iniciar, nos solicita <b>añadir</b> una cuenta, elegimos el
+protocolo <b>Bonjour</b> e ingresamos nuestro <b>Nombre</b> y <b>Apodo</b>, para
+finalizar presionamos <b>Aceptar</b> y luego <b>Cerrar</b>.
+</p>
+
+<p>
+Listo, ahora vamos a poder chatear con todos aquellos que en la
+red local, tengan instalando un programa que soporte el protocolo
+<b>Bonjour</b>, también conocido como <b>IChat</b> o <b>Avahi</b>.
+</p>
+
+<p>
+Comenzamos a chatear con nuestros amigos y al mismo tiempo
+ejecutamos <code>tcpdump</code> filtrando por el puerto <code>5298</code>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">tcpdump -i eth2 -n -A -c5 port 5298
+</pre>
+</div>
+
+<p>
+El resultado de capturar 5 paquetes es:
+</p>
+
+<pre class="example">
+11:15:55.330043 IP6 fe80::215:84ff:fe2b:6b8e.51378 &gt; fe80::3e07:54ff:fe55:62d4.5298: Flags [P.], seq 31812643:31812912, ack 3913411495, win 551, options [nop,nop,TS val 21598217 ecr 29125604], length 269
+`....-.@.............&lt;Z.........&gt;.T..Ub.......l#.A.....'.U.....
+.I.  ..k.&lt;message to='Leito@zapata' from='osiris@osiale' type='chat'&gt;&lt;body&gt;bien, escribiendo el curso de ayer&lt;/body&gt;&lt;html xmlns='http://www.w3.org/1999/xhtml'&gt;&lt;body&gt;&lt;font&gt;bien, escribiendo el curso de ayer&lt;/font&gt;&lt;/body&gt;&lt;/html&gt;&lt;x xmlns='jabber:x:event'&gt;&lt;composing/&gt;&lt;/x&gt;&lt;/message&gt;
+11:15:55.330428 IP6 fe80::3e07:54ff:fe55:62d4.5298 &gt; fe80::215:84ff:fe2b:6b8e.51378: Flags [.], ack 269, win 274, options [nop,nop,TS val 29130803 ecr 21598217], length 0
+`.... .@........&gt;.T..Ub..............&lt;Z......A....m0....n......
+...3.I.      
+11:16:05.557354 IP6 fe80::215:84ff:fe2b:6b8e.51378 &gt; fe80::3e07:54ff:fe55:62d4.5298: Flags [P.], seq 269:554, ack 1, win 551, options [nop,nop,TS val 21600774 ecr 29130803], length 285
+`....=...............&lt;Z.........&gt;.T..Ub.......m0.A.....'.e.....
+.I.....3&lt;message to='Leito@zapata' from='osiris@osiale' type='chat'&gt;&lt;body&gt;y necesito capturar el tr..fico de Bonjour&lt;/body&gt;&lt;html xmlns='http://www.w3.org/1999/xhtml'&gt;&lt;body&gt;&lt;font&gt;y necesito capturar el tr..fico de Bonjour&lt;/font&gt;&lt;/body&gt;&lt;/html&gt;&lt;x xmlns='jabber:x:event'&gt;&lt;composing/&gt;&lt;/x&gt;&lt;/message&gt;
+11:16:05.557715 IP6 fe80::3e07:54ff:fe55:62d4.5298 &gt; fe80::215:84ff:fe2b:6b8e.51378: Flags [.], ack 554, win 291, options [nop,nop,TS val 29133360 ecr 21600774], length 0
+`.... ..........&gt;.T..Ub..............&lt;Z......A....nM...#Y......
+...0.I..
+11:16:07.356720 IP6 fe80::215:84ff:fe2b:6b8e.51378 &gt; fe80::3e07:54ff:fe55:62d4.5298: Flags [P.], seq 554:761, ack 1, win 551, options [nop,nop,TS val 21601223 ecr 29133360], length 207
+`....................&lt;Z.........&gt;.T..Ub.......nM.A.....'.......
+.I.....0&lt;message to='Leito@zapata' from='osiris@osiale' type='chat'&gt;&lt;body&gt;:-P&lt;/body&gt;&lt;html xmlns='http://www.w3.org/1999/xhtml'&gt;&lt;body&gt;&lt;font&gt;:-P&lt;/font&gt;&lt;/body&gt;&lt;/html&gt;&lt;x xmlns='jabber:x:event'&gt;&lt;composing/&gt;&lt;/x&gt;&lt;/message&gt;
+</pre>
+
+<p>
+Si miramos el primer paquete ignorando los caracteres especiales,
+se puede ver que el mensaje es para <b>Leito</b> desde la
+máquina <b>zapata</b> y lo envía <b>osiris</b> desde la máquina <b>osiale</b> y
+el cuerpo del mensaje se encuentra entre las <b>etiquetas</b> <code>&lt;body&gt;</code>
+y <code>&lt;/body&gt;</code>.
+</p>
+
+<pre class="example">
+&lt;message to='Leito@zapata' from='osiris@osiale' type='chat'&gt;
+  &lt;body&gt;bien, escribiendo el curso de ayer&lt;/body&gt;
+  &lt;html xmlns='http://www.w3.org/1999/xhtml'&gt;
+  &lt;body&gt;
+    &lt;font&gt;bien, escribiendo el curso de ayer&lt;/font&gt;
+  &lt;/body&gt;
+  &lt;/html&gt;
+  &lt;x xmlns='jabber:x:event'&gt;&lt;composing/&gt;&lt;/x&gt;
+&lt;/message&gt;
+</pre>
+
+<p>
+Entonces, quiere decir que tanto lo que navegamos como lo que
+chateamos puede ser interceptado y leído por cualquiera en la
+red, solo basta usar <code>tcpdump</code>.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">el fin de la privacidad?</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Cualquier <b>sniffer</b> como <code>tcpdump</code> puede capturar todo el tráfico
+de la red y hasta se podría modificar el contenido de los
+paquetes que viajan a través de la red sin que nos demos cuenta.
+</p>
+
+<p>
+Y entonces, cómo hacemos para tener algo de privacidad?
+</p>
+
+<p>
+La respuesta es <b>no enviar mensajes en texto plano</b>, para esto lo
+mejor es <b>cifrar todos los mensajes</b>, hay varios protocolos que
+envían y reciben todos los datos de manera cifrada.
+</p>
+
+<p>
+En el caso de los sitios webs es posible acceder por <b>HTTPS</b> en
+lugar de <b>HTTP</b>, por ejemplo, en lugar de ir a
+<code>http://google.com</code> podemos acceder a
+<code>https://encrypted.google.com/</code> y asi todo lo que enviemos
+a <b>google</b> irá cifrado y aunque alguien capture ese tráfico de
+red, <b>no podrá entenderlo</b>, aunque no evitaremos que sepan que
+estamos ingresando al sitio <b>google.com</b>.
+</p>
+
+<p>
+Tener que tipear <b>https</b> en lugar de <b>http</b> todo el tiempo no es
+algo cómodo y además la mayoría de las páginas web hacen enlaces
+a los sitios usando <b>http</b>. La solución a este problema es
+instalar un <b>plugin</b> en el navegador, por ejemplo para <b>Firefox</b>
+existe <b>HTTPSEveryWhere</b>, que hace esto por nosotros y soporta
+una gran lista de sitios webs, obviamente los más usados.
+</p>
+
+<p>
+Para instalarlo, acceder a: 
+<a href="https://www.eff.org/https-everywhere-node">https://www.eff.org/https-everywhere-node</a>
+</p>
+
+<p>
+También existen otras alternativas como usar un <b>túnel SSH</b>.
+Siempre que dispongamos de una máquina remota con GNU/Linux
+conectada a internet (en nuestra casa, por ejemplo) podríamos
+usarla para cifrar nuestra conexión y lograr (por lo menos) que
+en la red local, en la que estamos actualmente nadie pueda ver lo
+que hacemos.
+</p>
+
+<p>
+Para esto, podemos hacer lo siguiente:
+</p>
+
+<pre class="example">
+ssh -fN -D 9090 osiris@osiux.com
+</pre>
+
+<p>
+De esta manera, de ahora en más vamos a tener un <b>Proxy SOCKS</b>
+corriendo en el puerto <code>9090</code>, sólo bastaría decirle a todas las
+aplicaciones que usan la red, que no se conecten directamente,
+sino que utilicen <code>localhost:9090</code> como servidor <b>Proxy</b>.
+</p>
+
+<p>
+En <b>Firefox</b> ir a <b>Editar-&gt;Preferencias-&gt;Avanzadas-&gt;Red-&gt;Configuración</b>
+</p>
+
+<p>
+Ahí seleccionamos <b>Configuración manual de proxy</b> e ingresamos
+en <b>Servidor proxy SOCKS</b> la dirección <b>localhost y el puerto
+9090</b>, presionamos <b>Aceptar</b>, y listo, ya podemos navegar
+tranquilos.
+</p>
+
+<p>
+En realidad, sólo estamos cifrando un tramo de la conexión, desde
+la máquina en donde estamos hasta la máquina remota, desde esta
+última el tráfico viajará sin el cifrado de <b>SSH</b>.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">por las dudas yo guardo el tráfico de red ;-)</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Podemos decirle a <code>tcpdump</code> que en lugar de mostrarnos el tráfico
+de red, lo guarde en un archivo, para luego analizarlo en
+profundidad. También se utiliza para hacer monitoreo remoto o
+buscar la causa de algún problema en la red, detectar alguna
+intrusión no autorizada, hacer auditorías, etc.
+</p>
+
+<p>
+Mediante <code>-s 0</code> indicamos que capture el paquete completo y con
+<code>-w</code> se especifica el archivo donde se guarda el tráfico.
+</p>
+
+<pre class="example">
+sudo tcpdump -i eth2 -n -s 0 -w porlasdudas.pcap
+</pre>
+
+<p>
+Existen muchas herramientas que leen archivos <code>.pcap</code>, una de
+ellas es <b>Wireshark</b>, que es un analizador de protocolos muy
+completo y que además posee interfaz gráfica.
+</p>
+
+<p>
+Lo instalamos:
+</p>
+
+<pre class="example">
+apt-get install wireshark
+</pre>
+
+<p>
+Podemos indicar a <b>WireShark</b> que inicie leyendo el archivo:
+</p>
+
+<pre class="example">
+wireshark -r porlasdudas.pcap
+</pre>
+
+<p>
+También se puede iniciar desde el menú <b>Aplicaciones-&gt;Internet-&gt;Wireshark</b>
+</p>
+
+<p>
+Una vez iniciado, se puede apreciar que la pantalla está dividida
+en tres partes, que serían:
+</p>
+
+<ul class="org-ul">
+<li>el listado de paquetes
+</li>
+<li>panel de detalles del paquete seleccionado
+</li>
+<li>panel de bytes del paquete seleccionado
+</li>
+</ul>
+
+<p>
+Es bastante intuitivo y muy interesante para los curiosos! :-D
+</p>
+</div>
+</div>
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">no entendí nada! :-(</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+El análisis de tráfico de red, requiere de ciertos conocimientos
+básicos de redes, sobre el modelo <b>OSI</b> y el modelo <b>TCP/IP</b>,
+saber sobre <b>DNS</b>, <b>ARP</b> y otras tantas cosas como los <b>RFC</b>,
+pero a no desesperar, leer aunque sea muy por arriba los
+siguiente links:
+</p>
+
+<ul class="org-ul">
+<li><a href="https://es.wikipedia.org/wiki/Modelo_osi">https://es.wikipedia.org/wiki/Modelo_osi</a>
+</li>
+<li><a href="https://es.wikipedia.org/wiki/Modelo_TCP/IP">https://es.wikipedia.org/wiki/Modelo_TCP/IP</a>
+</li>
+</ul>
+
+<p>
+La próxima entrega veremos en un lenguaje muy simple y claro, lo
+básico de cómo funcionan las redes y sobre todo cómo interactúan
+los distintos elementos que la componen.
+</p>
+
+<p>
+La idea de usar <b>tcpdump</b> era volverlos un poquito paranoicos,
+ahora saben que es muy probable que alguien en algún punto de la
+red, esté mirando (y hasta guardando) todos los datos que
+enviamos y recibimos, aunque sólo se trate del <i>Administrador de la Red</i>.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Osiris Alejandro Gomez (<a href="mailto:osiux@osiux.com">osiux@osiux.com</a>)</p>
+<p class="date">Date: </p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 23.4.1 (<a href="http://orgmode.org">Org</a> mode 8.0)</p>
+<p class="xhtml-validation"><a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a></p>
+</div>
+</body>
+</html>
