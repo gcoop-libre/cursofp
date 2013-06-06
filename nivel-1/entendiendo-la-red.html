@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+<title>entendiendo la red</title>
+<!-- 2013-06-05 mié 13:27 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+
+<link rel="stylesheet" type="text/css" media="screen, print" href="print.css"/>
+<link rel="stylesheet" type="text/css" media="screen" href="../css/gumby.css"/>
+<link rel="stylesheet" type="text/css" media="screen" href="../css/style.css"/>
+</head>
+<body>
+<div id="preamble">
+</div>
+    <div class='container'>
+<div class='row'>
+<div id="content">
+<h1 class="title">entendiendo la red</h1>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Topología, redes y Subredes</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>centralizada
+
+
+<div class="figure">
+<p><img  src="img/redes-centralizadas.png" alt="redes-centralizadas.png" /></p>
+</div>
+</li>
+
+<li>descentralizada
+
+
+<div class="figure">
+<p><img  src="img/redes-descentralizadas.png" alt="redes-descentralizadas.png" /></p>
+</div>
+</li>
+
+<li>en malla o <i>mesh</i>
+
+
+<div class="figure">
+<p><img  src="img/redes-mesh.png" alt="redes-mesh.png" /></p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Asignación de IPs por medio de DHCP</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>DHCP server
+</li>
+<li>DHCP client
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1">Red de 4 equipos</h3>
+<div class="outline-text-3" id="text-2-1">
+
+<div class="figure">
+<p><img  src="img/redes-lan.png" alt="redes-lan.png" /></p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><code>B</code> dice, <b>necesito una IP!</b></h3>
+<div class="outline-text-3" id="text-2-2">
+<ul class="org-ul">
+<li>mensaje: <code>DHCPDISCOVER</code>
+</li>
+<li>protocolo: UDP
+</li>
+<li>puerto destino: 67
+</li>
+<li>dirección física: 01:12:23:34:45:bb
+</li>
+</ul>
+
+
+<div class="figure">
+<p><img  src="img/redes-dhcp-discover.png" alt="redes-dhcp-discover.png" /></p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><code>D</code> dice, <b>yo te puedo dar IP!</b></h3>
+<div class="outline-text-3" id="text-2-3">
+<ul class="org-ul">
+<li>mensaje: <code>DHCPOFFER</code>
+</li>
+<li>dirección física: 01:12:23:34:45:dd
+</li>
+<li>dirección IP: 192.168.10.102
+</li>
+<li>gateway: 192.168.10.1
+</li>
+<li>dns primario: 8.8.8.8
+</li>
+<li>dns secundario: 8.8.4.4
+</li>
+</ul>
+
+
+<div class="figure">
+<p><img  src="img/redes-dhcp-offer.png" alt="redes-dhcp-offer.png" /></p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4"><code>B</code> dice, confirmo recepción!</h3>
+<div class="outline-text-3" id="text-2-4">
+<ul class="org-ul">
+<li>mensaje: <code>DHCPREQUEST</code>
+</li>
+</ul>
+
+
+<div class="figure">
+<p><img  src="img/redes-dhcp-request.png" alt="redes-dhcp-request.png" /></p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2-5" class="outline-3">
+<h3 id="sec-2-5"><code>D</code> dice, confirmo confirmación!</h3>
+<div class="outline-text-3" id="text-2-5">
+<ul class="org-ul">
+<li>mensaje: <code>DHCPACK</code>
+</li>
+</ul>
+
+
+<div class="figure">
+<p><img  src="img/redes-dhcp-ack.png" alt="redes-dhcp-ack.png" /></p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">Resolución de nombres de dominios DNS</h2>
+<div class="outline-text-2" id="text-3">
+<div class="org-src-container">
+
+<pre class="src src-sh">host localhost
+</pre>
+</div>
+
+<pre class="example">
+localhost.gcoop.com.ar has address 127.0.0.1
+</pre>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">dig osiux.com
+</pre>
+</div>
+
+<pre class="example">
+; &lt;&lt;&gt;&gt; DiG 9.8.4-P1 &lt;&lt;&gt;&gt; osiux.com
+;; global options: +cmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 43331
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0
+
+;; QUESTION SECTION:
+;osiux.com.          IN  A
+
+;; ANSWER SECTION:
+osiux.com.       300 IN  A   96.8.118.129
+
+;; Query time: 201 msec
+;; SERVER: 192.168.10.3#53(192.168.10.3)
+;; WHEN: Wed Jun  5 13:26:53 2013
+;; MSG SIZE  rcvd: 43
+</pre>
+</div>
+
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1">viendo un paquete de query dns</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+
+<pre class="src src-sh">tcpdump -r dns-query.pcap -nvX
+</pre>
+</div>
+
+<pre class="example">
+02:14:20.301428 IP (tos 0x0, ttl 64, id 27874, offset 0, flags [none], proto UDP (17), length 55)
+    127.0.0.1.57039 &gt; 127.0.0.1.53: 39172+ A? osiux.com. (27)
+    0x0000:  4500 0037 6ce2 0000 4011 0fd2 7f00 0001  E..7l...@.......
+    0x0010:  7f00 0001 decf 0035 0023 fe36 9904 0100  .......5.#.6....
+    0x0020:  0001 0000 0000 0000 056f 7369 7578 0363  .........osiux.c
+    0x0030:  6f6d 0000 0100 01                        om.....
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2">analizando un paquete de query dns</h3>
+<div class="outline-text-3" id="text-3-2">
+<div class="org-src-container">
+
+<pre class="src src-sh">tshark -r dns-query.pcap -VO dns
+</pre>
+</div>
+
+<pre class="example">
+Frame 1: 71 bytes on wire (568 bits), 71 bytes captured (568 bits)
+Linux cooked capture
+Internet Protocol Version 4, Src: 127.0.0.1 (127.0.0.1), Dst: 127.0.0.1 (127.0.0.1)
+User Datagram Protocol, Src Port: 57039 (57039), Dst Port: domain (53)
+Domain Name System (query)
+    Transaction ID: 0x9904
+    Flags: 0x0100 Standard query
+        0... .... .... .... = Response: Message is a query
+        .000 0... .... .... = Opcode: Standard query (0)
+        .... ..0. .... .... = Truncated: Message is not truncated
+        .... ...1 .... .... = Recursion desired: Do query recursively
+        .... .... .0.. .... = Z: reserved (0)
+        .... .... ...0 .... = Non-authenticated data: Unacceptable
+    Questions: 1
+    Answer RRs: 0
+    Authority RRs: 0
+    Additional RRs: 0
+    Queries
+        osiux.com: type A, class IN
+            Name: osiux.com
+            Type: A (Host address)
+            Class: IN (0x0001)
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3">capturar consultas al dns</h3>
+<div class="outline-text-3" id="text-3-3">
+<pre class="example">
+ssh root@linksys '/usr/sbin/tcpdump -i br0 -s 0 -w - dst port 53' &gt;linksys.pcap
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-3-4" class="outline-3">
+<h3 id="sec-3-4">ranking de dns</h3>
+<div class="outline-text-3" id="text-3-4">
+<pre class="example">
+tcpdump -r linksys.pcap -c 2000 -nnnA dst port 53 | \
+egrep -o "A+\? .*\." | sed s/".$"//g | awk '{print $2}' | \
+egrep -v "(osiux|fbcdn|akamai)" | sort | uniq -c | sort -nr | head
+</pre>
+
+<table id="ranking-dns" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="right" />
+
+<col  class="left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="right">47</td>
+<td class="left">www.facebook.com</td>
+</tr>
+
+<tr>
+<td class="right">42</td>
+<td class="left">dns.msftncsi.com</td>
+</tr>
+
+<tr>
+<td class="right">41</td>
+<td class="left">su.ff.avast.com</td>
+</tr>
+
+<tr>
+<td class="right">37</td>
+<td class="left">ssl.google-analytics.com</td>
+</tr>
+
+<tr>
+<td class="right">37</td>
+<td class="left">ipv6.msftncsi.com</td>
+</tr>
+
+<tr>
+<td class="right">32</td>
+<td class="left">www.habbo.es</td>
+</tr>
+
+<tr>
+<td class="right">26</td>
+<td class="left">imap.googlemail.com</td>
+</tr>
+
+<tr>
+<td class="right">21</td>
+<td class="left">dynamic.zoneedit.com</td>
+</tr>
+
+<tr>
+<td class="right">19</td>
+<td class="left">www.msftncsi.com</td>
+</tr>
+
+<tr>
+<td class="right">18</td>
+<td class="left">kiwwwi.com.ar</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">Cómo saber la IP de un equipo?</h2>
+<div class="outline-text-2" id="text-4">
+</div><div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1">B dice, <b>cuál es la IP de D?</b></h3>
+<div class="outline-text-3" id="text-4-1">
+<ul class="org-ul">
+<li>Se que D es <b>00:14:d1:18:4a:dd</b>
+</li>
+<li>Yo soy B y mi mac es <b>00:14:d1:18:4a:bb</b>
+</li>
+<li>Todos reciben paquete ARP por difusión
+</li>
+</ul>
+
+
+<div class="figure">
+<p><img  src="img/redes-arp-1.png" alt="redes-arp-1.png" /></p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2">D contesta, <b>mi IP es 10.4.14.225</b></h3>
+<div class="outline-text-3" id="text-4-2">
+
+<div class="figure">
+<p><img  src="img/redes-arp-2.png" alt="redes-arp-2.png" /></p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3">Quénes están en esta red?</h3>
+<div class="outline-text-3" id="text-4-3">
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo arp-scan --interface eth0 --localnet
+</pre>
+</div>
+
+<pre class="example">
+0 packets received by filter, 0 packets dropped by kernel
+Ending arp-scan 1.8.1: 256 hosts scanned in 1.625 seconds (157.54 hosts/sec). 0 responded
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-4-4" class="outline-3">
+<h3 id="sec-4-4">pingueando</h3>
+<div class="outline-text-3" id="text-4-4">
+<div class="org-src-container">
+
+<pre class="src src-sh">ping -c 5 127.0.0.1
+</pre>
+</div>
+
+<pre class="example">
+PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.
+64 bytes from 127.0.0.1: icmp_req=1 ttl=64 time=0.065 ms
+64 bytes from 127.0.0.1: icmp_req=2 ttl=64 time=0.052 ms
+64 bytes from 127.0.0.1: icmp_req=3 ttl=64 time=0.052 ms
+64 bytes from 127.0.0.1: icmp_req=4 ttl=64 time=0.051 ms
+64 bytes from 127.0.0.1: icmp_req=5 ttl=64 time=0.051 ms
+
+--- 127.0.0.1 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 3999ms
+rtt min/avg/max/mdev = 0.051/0.054/0.065/0.007 ms
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-4-5" class="outline-3">
+<h3 id="sec-4-5">capturando pings</h3>
+<div class="outline-text-3" id="text-4-5">
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo tcpdump -i lo -nnnt -c 5 icmp
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4-6" class="outline-3">
+<h3 id="sec-4-6">viendo un <code>ping</code></h3>
+<div class="outline-text-3" id="text-4-6">
+<pre class="example">
+sudo tcpdump -i lo -nnntvvX -c 1 -e icmp
+</pre>
+
+<pre class="example">
+00:00:00:00:00:00 &gt; 00:00:00:00:00:00, ethertype IPv4 (0x0800), length 98: (tos 0x0, ttl 64, id 0, offset 0, flags [DF], proto ICMP (1), length 84)
+    127.0.0.1 &gt; 127.0.0.1: ICMP echo request, id 4177, seq 329, length 64
+  0x0000:  4500 0054 0000 4000 4001 3ca7 7f00 0001  E..T..@.@.&lt;.....
+  0x0010:  7f00 0001 0800 a68d 1051 0149 e754 5e51  .........Q.I.T^Q
+  0x0020:  022f 0d00 0809 0a0b 0c0d 0e0f 1011 1213  ./..............
+  0x0030:  1415 1617 1819 1a1b 1c1d 1e1f 2021 2223  .............!"#
+  0x0040:  2425 2627 2829 2a2b 2c2d 2e2f 3031 3233  $%&amp;'()*+,-./0123
+  0x0050:  3435 3637                                4567
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">protocolos</h2>
+<div class="outline-text-2" id="text-5">
+
+<div class="figure">
+<p><img  src="img/redes-protocolos-1.png" alt="redes-protocolos-1.png" /></p>
+</div>
+
+
+<div class="figure">
+<p><img  src="img/redes-protocolos-2.png" alt="redes-protocolos-2.png" /></p>
+</div>
+</div>
+
+<div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1">Qué tiene un paquete TCP/IP?</h3>
+<div class="outline-text-3" id="text-5-1">
+<pre class="example">
++------------------------+--------------------------+
+| MAC origen fe:ca:fe:ca | MAC destino  ca:fe:ca:fe |
++------------------------+--------------------------+
+| IP origen 192.168.1.22 | IP destino  96.8.118.129 |
++---------------------------------------------------+
+| Puerto origen    45678 | Puerto destino: 80       |
++------------------------+--------------------------+
+| Nro Secuencia    12345 | Nro ACK                  |
++---+---+---+---+---+----+--------------------------+
+| U | A | P | R | S | F | GET / HTTP/1.0            |
+| R | C | S | S | Y | I |                           |
+| G | K | H | T | N | N |                           |
++---+---+---+---+---+---+---------------------------+
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-5-2" class="outline-3">
+<h3 id="sec-5-2">Ethernet header</h3>
+<div class="outline-text-3" id="text-5-2">
+<pre class="example">
+|                   |1                  |2                  |3  |
+|0|1|2|3|4|5|6|7|8|9|0|1|2|3|4|5|6|7|8|9|0|1|2|3|4|5|6|7|8|9|0|1|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|         Hardware type         |          Protocol type        |
++---------------+---------------+-------------------------------+
+|Hw address len.|Pr address len.|             Opcode            |
++---------------+---------------+-------------------------------+
+|               Source hardware address                         |
++---------------------------------------------------------------+
+|               Source protocol address                         |
++---------------------------------------------------------------+
+|               Destination hardware address                    |
++---------------------------------------------------------------+
+|               Destination protocol address                    |
++---------------------------------------------------------------+
+|                            Data                               |
++---------------------------------------------------------------+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">IP header</h2>
+<div class="outline-text-2" id="text-6">
+<pre class="example">
+|                   |1                  |2                  |3  |
+|0|1|2|3|4|5|6|7|8|9|0|1|2|3|4|5|6|7|8|9|0|1|2|3|4|5|6|7|8|9|0|1|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|Version|  IHL  | Diff.Services |     Total length              |
++-------+-------+---------------+-----+-------------------------+
+|        Identification         |Flags|         Fragment offset |
++---------------+---------------+-----+-------------------------+
+|    TTL        | Protocol      | Header checksum               |
++---------------+---------------+-------------------------------+
+|                       Source IP address                       |
++---------------------------------------------------------------+
+|                  Destination IP address                       |
++---------------------------------------------------------------+
+|                     Options and padding                       |
++---------------------------------------------------------------+
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">UPD header</h2>
+<div class="outline-text-2" id="text-7">
+<pre class="example">
+|                   |1                  |2                  |3  |
+|0|1|2|3|4|5|6|7|8|9|0|1|2|3|4|5|6|7|8|9|0|1|2|3|4|5|6|7|8|9|0|1|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|          Source Port          |        Destination Port       |
++-------------------------------+-------------------------------+
+|          Length               |        Checksum               |
++-------------------------------+-------------------------------+
+|                           Data                                |
++---------------------------------------------------------------+
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8">TCP header</h2>
+<div class="outline-text-2" id="text-8">
+<pre class="example">
+|                   |1                  |2                  |3  |
+|0|1|2|3|4|5|6|7|8|9|0|1|2|3|4|5|6|7|8|9|0|1|2|3|4|5|6|7|8|9|0|1|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|          Source Port          |        Destination Port       |
++-------------------------------+-------------------------------+
+|                        Sequence Number                        |
++-------------------------------+-------------------------------+
+|                     Acknowledgment Number                     |
++-------+-----+-----+-+-+-+-+-+-+-------------------------------+
+|dOffset|rsrvd| ECN |U|A|P|R|S|F|        Window                 |
+|       |     |     |R|C|S|S|Y|I|                               |
+|       |     |     |G|K|H|T|N|N|                               |
++-------+-----+-----+-+-+-+-+-+-+-------------------------------+
+| Checksum                      | Urgent Pointer                |
++-------------------------------+-------------------------------+
+|                      Options and padding                      |
++---------------------------------------------------------------+
+|                           Data                                |
++---------------------------------------------------------------+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Osiris Alejandro Gómez (<a href="mailto:osiux@osiux.com">osiux@osiux.com</a>)</p>
+<p class="date">Date: 2013-04-04</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.0.3)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
